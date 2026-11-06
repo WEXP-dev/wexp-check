@@ -1,0 +1,113 @@
+{
+ "asserted_claim": {
+  "base": "intent",
+  "qualifiers": []
+ },
+ "base_findings": [
+  {
+   "base": "intent",
+   "basis_refs": [
+    [
+     "draft-sergeev-wexp-core-02/fixture-1",
+     "I"
+    ]
+   ],
+   "evaluation_context_ref": "C",
+   "limitations": [],
+   "reasons": [],
+   "semantic_validation": "supported",
+   "target": "T",
+   "target_binding": "supported"
+  }
+ ],
+ "boundary_finding": {
+  "basis_refs": [
+   [
+    "draft-sergeev-wexp-core-02/fixture-1",
+    "bd"
+   ]
+  ],
+  "ceiling_base": "intent",
+  "evaluation_context_ref": "C",
+  "grounding": "attributed",
+  "limitations": [],
+  "reasons": [],
+  "status": "supported",
+  "target": "T",
+  "target_binding": "supported"
+ },
+ "counter_evidence": [
+  {
+   "affected_claims": [],
+   "basis_refs": [],
+   "limitations": [],
+   "reasons": [],
+   "status": "not-supplied"
+  }
+ ],
+ "evaluation_context": {
+  "evaluated_at": "2026-10-12T00:00:00Z",
+  "id": "C",
+  "profile_identifiers": [
+   "draft-sergeev-wexp-core-02/fixture-1"
+  ],
+  "trust_configuration": "core02-fixture-trust-1"
+ },
+ "evaluation_scope": [
+  {
+   "capability": "carrier-mapping",
+   "status": "evaluated"
+  },
+  {
+   "capability": "authenticity",
+   "status": "evaluated"
+  },
+  {
+   "capability": "target-binding",
+   "status": "evaluated"
+  },
+  {
+   "capability": "boundary-grounding",
+   "status": "evaluated"
+  },
+  {
+   "capability": "observation-support",
+   "status": "evaluated"
+  },
+  {
+   "capability": "intent-support",
+   "status": "evaluated"
+  },
+  {
+   "capability": "invocation-support",
+   "status": "evaluated"
+  },
+  {
+   "capability": "execution-support",
+   "status": "evaluated"
+  },
+  {
+   "capability": "provenance-support",
+   "status": "evaluated"
+  },
+  {
+   "capability": "independent-verification",
+   "status": "evaluated"
+  },
+  {
+   "capability": "composition",
+   "status": "evaluated"
+  },
+  {
+   "capability": "counter-evidence",
+   "status": "evaluated"
+  }
+ ],
+ "fatal_conditions": [],
+ "inherited_limitations": [],
+ "profile_evaluation_gaps": [],
+ "qualifier_findings": [],
+ "recorder_relations": [],
+ "semantics_version": "wexp-core-2",
+ "target": "T"
+}

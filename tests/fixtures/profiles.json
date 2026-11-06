@@ -1,0 +1,11 @@
+{
+ "draft-sergeev-wexp-core-02/fixture-1": {
+  "relation_tokens": [],
+  "scope_names": [],
+  "tokens": {
+   "P_COUNTER_FAIL": {
+    "category": "substantive"
+   }
+  }
+ }
+}

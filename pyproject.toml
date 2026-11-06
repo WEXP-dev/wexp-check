@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wexp-check"
+version = "0.1.0"
+description = "Independent appraiser for draft-sergeev-wexp-core-02 (semantics wexp-core-2), written from the published text"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+authors = [{name = "WEXP contributors"}]
+dependencies = []
+
+[tool.setuptools]
+packages = ["wexp_check"]
