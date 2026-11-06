@@ -323,7 +323,7 @@ def _cross_field(n, catalog):
 def ingest(value, catalog):
     """Run the ordered checks of 6.2; return the canonical input or raise Rejection."""
     # 6.2 check 1
-    if not isinstance(value, dict) or not isinstance(value.get("semantics_version"), str):
+    if not isinstance(value, dict) or not _is_scalar_text(value.get("semantics_version")):  # 13: text atom
         raise _malformed()
     # 6.2 check 2
     if value["semantics_version"] != VERSION:

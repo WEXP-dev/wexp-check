@@ -60,3 +60,25 @@ and this is noted at the test.
 35 / 35. The unit tests pass. No other file of the frozen code was changed. Both decisions
 are now also recorded for a reader of the code at the two comments; `DECISIONS.md` is the
 implementation session's own record and was left as delivered.
+
+The re-derivation record referred to above is `evidence/core-02-set-001-rederivation/` in
+`WEXP-dev/wexp-vectors`, branch `evidence/core-02-set-001-rederivation`, commit `a936c891`
+(not yet on main at the time of writing); its `rederived/AMBIGUITIES.json` lists P08 and P18.
+
+## Changes after the independent review (run 3)
+
+A review of the repository at commit `7b5ab8e` asked for two code changes; neither alters
+any corpus result, and the comparison was re-run afterwards as run 3 (`RUN-RECORD.json`):
+
+1. `wexp_check/ingress.py`, ordered check 1: `semantics_version` is now tested with the same
+   scalar-text rule as every other atom, so a string holding a lone surrogate is a non-text
+   atom and `E_MALFORMED_NORMALIZED_INPUT`, consistent with the P08 alignment above (section
+   6.2 check 1: "semantics_version is absent or is not a text atom"). Previously any JSON string
+   passed check 1 and fell to check 2. Not exercised by either corpus.
+2. `wexp_check/core.py`: `appraise()` now checks the profile catalog shape itself (previously
+   only the command line did), so a malformed catalog raises `ValueError` instead of an
+   arbitrary `KeyError`. Harness precondition only; no Core semantics involved.
+
+Also in the same commit: `pyproject.toml` build floor raised to `setuptools>=77` (SPDX license
+string), `-B` in the test subprocess and a `.gitignore`, the wording of one sentence in
+`FREEZE.md`, the citations and set 002 status in `README.md`, and `docs/REPRESENTATION.md`.

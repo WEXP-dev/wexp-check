@@ -482,7 +482,7 @@ class CommandLine(unittest.TestCase):
             with open(path, "w", encoding="utf-8") as fh:
                 fh.write(text)
             return subprocess.run(
-                [sys.executable, "-m", "wexp_check", "--input", path, "--profiles",
+                [sys.executable, "-B", "-m", "wexp_check", "--input", path, "--profiles",
                  os.path.join(HANDOFF, "profiles.json")],
                 cwd=OUT, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": OUT})
 

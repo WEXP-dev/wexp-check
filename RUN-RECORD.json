@@ -2,11 +2,11 @@
   "wexp_check_frozen_commit": "b28d00af6035bcb01352cd15eadec3eb2b3db100",
   "freeze_record": "FREEZE.md",
   "code_files_sha256_after_alignment": {
-    "tests/test_wexp_check.py": "8bdf707da6f13aa04a825d09f8553f567451ac13f46fe418312e85e89217d146",
+    "tests/test_wexp_check.py": "21f6aa08f01d3e456b3f1969eaad6c986852216bebdd692eab6428bea1754750",
     "wexp_check/__init__.py": "ae4a9671e6bc22d8c3d591e36db00d1d0a069307fa1e0cf7afe030e0ddfe5a4a",
     "wexp_check/__main__.py": "6554ab7c151809297825d9af16e0463dac6c6cc176c4912bd4e011ba8f048120",
-    "wexp_check/core.py": "d83ac0795f32b148acc45d924d9249647bc687b9f49f0f9658401f0cbc9e463e",
-    "wexp_check/ingress.py": "371af34defef1a4d42375a6f0531836050fff6802090e947466a4393c02a736b",
+    "wexp_check/core.py": "030ac7c61e9b86875a1e1b14b23a1dd192dd1cab5c26215ecf892d9260c11b8b",
+    "wexp_check/ingress.py": "c6f8443d37f5ce778a660ae1ffb05bf6f79eb05ab5edf8aca613d54e79eeadc8",
     "wexp_check/tokens.py": "6e0c45e0ffddac18b7b7e6e4d0d28f39f08b98230243318b80794256b0db35ba"
   },
   "runner_compared_against": {
@@ -28,12 +28,13 @@
       "branch_commit_not_yet_on_main": "e676fcbb869b5f22894020e01136b0ffc48e5ba8",
       "corpus_json_sha256": "9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
       "manifest_sha256": "3961528fd349b584285d181ce466e0447d4e9f69a223ab33a4a70b1d6fdff8cb",
-      "cases": 35
+      "cases": 35,
+      "status": "branch state, not yet on main; no package lock exists yet"
     }
   },
   "interpreter": "CPython 3.12.13",
   "platform": "macOS-15.7.9-arm64-arm-64bit",
-  "comparison_method": "component-wise over the twenty result members; collections the harness defines as sets compared as sets; Booleans distinct from numbers; null distinct from absent; each engine run in its own interpreter process; inputs checked for non-mutation",
+  "comparison_method": "component-wise over the twenty result members; collections the harness defines as sets compared as sets; Booleans distinct from numbers; null distinct from absent; each engine run in its own interpreter process; inputs checked for non-mutation; the committed comparison files are the driver output with the two top-level keys holding local directory paths (wexp_check_path, wexp_ref_src) removed and nothing else changed",
   "runs": [
     {
       "order": 1,
@@ -71,6 +72,23 @@
         "of": 35,
         "differing": []
       }
+    },
+    {
+      "order": 3,
+      "code": "after the two post-review changes recorded in CHANGES-AFTER-RUN.md (check 1 scalar text; catalog check inside appraise)",
+      "output": "comparison.json (per-case results identical to run 2)",
+      "set001": {
+        "equal_to_expected": 89,
+        "equal_to_wexp_ref": 89,
+        "of": 89,
+        "differing": []
+      },
+      "set002": {
+        "equal_to_expected": 35,
+        "equal_to_wexp_ref": 35,
+        "of": 35,
+        "differing": []
+      }
     }
   ],
   "divergence_classification": {
@@ -78,7 +96,8 @@
     "P18": "text ambiguity (domain of current_scope_capability); same open question as the set 001 re-derivation record",
     "wexp_ref_defects": [],
     "expectation_errors": [],
-    "A1_to_A6_involved": []
+    "A1_to_A6_involved": [],
+    "re_derivation_record": "WEXP-dev/wexp-vectors branch evidence/core-02-set-001-rederivation commit a936c8913feca00450caac40c10f4f2d3afd4135, evidence/core-02-set-001-rederivation/rederived/AMBIGUITIES.json"
   },
-  "recorded_at_utc": "2026-11-06T19:28:04Z"
+  "recorded_at_utc": "2026-11-06T19:42:21Z"
 }

@@ -3,6 +3,9 @@
 `wexp_check` is an implementation of the normalized-input appraisal procedure of the published
 Internet-Draft `draft-sergeev-wexp-core-02` (WEXP Core, semantics version `wexp-core-2`),
 written from the published text; the author did not read wexp-ref or any WEXP corpus expectations.
+Besides the text, the author received only a short task brief, the representation note now kept as
+`docs/REPRESENTATION.md`, the section 13 fixture profile catalog and one input (C01) without its
+expected result; `FILES-READ.txt` lists every file opened.
 The specification, not this code or its output, is authoritative: where the two disagree, the
 text wins and the code is wrong. WEXP appraises how far normalized findings support an exact
 execution-related claim (observation, intent, invocation or execution, with the PROV and IV
@@ -37,7 +40,8 @@ result as a `dict` and does not mutate either argument.
 
 ## Representation
 
-The local JSON harness representation is the one described in the handoff documents: opaque atoms
+The local JSON harness representation is the one described in [`docs/REPRESENTATION.md`](docs/REPRESENTATION.md),
+the note handed to the author together with the text: opaque atoms
 are JSON strings; profile-scoped atoms and extension keys are two-element arrays
 `[profile_identifier, local_name]`; sets and the evaluation-scope map are arrays with logical
 set/map semantics; the logical value *unavailable* is `null`; a claim is `{"base", "qualifiers"}`;
@@ -84,9 +88,10 @@ Apache License 2.0; see `LICENSE`.
 ## Comparison record
 
 The code was frozen first ([`FREEZE.md`](FREEZE.md): SHA-256 of every file, committed before
-any corpus run) and then run, unchanged, against the two published Core-02 corpora of
-`WEXP-dev/wexp-vectors`: `WEXP-CORE-02-VECTORS-001` (89 cases, package revision 2, lock
-commit `d6827a5e`) and `WEXP-CORE-02-VECTORS-002` (35 cases, section 7 boundary matrix).
+any corpus run) and then run, unchanged, against two Core-02 corpora of
+`WEXP-dev/wexp-vectors`: the published `WEXP-CORE-02-VECTORS-001` (89 cases, package revision 2,
+lock commit `d6827a5e`) and `WEXP-CORE-02-VECTORS-002` (35 cases, section 7 boundary matrix) at
+branch commit `e676fcbb`, which is not yet on that repository's main branch.
 Every result was compared component by component, over all twenty members and with set
 semantics for the collections the harness defines as sets, both with the frozen expected
 results and with the output of `wexp_ref.core02` at `WEXP-dev/wexp-ref` commit `56289024`.
@@ -99,8 +104,10 @@ results and with the output of `wexp_ref.core02` at `WEXP-dev/wexp-ref` commit `
 The two run-1 differences, P08 and P18, are both places where the published text admits two
 readings and this implementation, written without seeing any corpus, took the reading the
 corpus did not. Neither is a defect of wexp-ref and neither is an error in a frozen
-expectation; an earlier independent re-derivation of the 89 expectations had already recorded
-exactly these two questions as open. [`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md) holds the
+expectation; an earlier independent re-derivation of the 89 expectations (`WEXP-dev/wexp-vectors`,
+branch `evidence/core-02-set-001-rederivation`, commit `a936c891`, directory
+`evidence/core-02-set-001-rederivation/`, not yet on main) had already recorded exactly these two
+questions as open. [`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md) holds the
 classification, the two readings with the text they rest on, and the exact change made.
 [`RUN-RECORD.json`](RUN-RECORD.json) identifies the frozen commit, the code digests after the
 change, the runner and corpora compared against, and both runs;

@@ -24,7 +24,7 @@ d83ac0795f32b148acc45d924d9249647bc687b9f49f0f9658401f0cbc9e463e  wexp_check/cor
 
 ## Files as delivered by the isolated implementation session (SHA-256, path)
 
-Three edits were made between delivery and this freeze, by the coordinator, not by
+Three edits were made between delivery and this freeze, by the repository maintainer, not by
 the implementation session. None changes the appraiser:
 
 1. `FILES-READ.txt`: the absolute local directory prefix of every path was removed,

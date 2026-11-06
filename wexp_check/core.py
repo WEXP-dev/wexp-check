@@ -2,6 +2,7 @@
 from itertools import combinations
 
 from .ingress import ALL, BASES, NE, VERSION, Rejection, cj, ingest
+from .tokens import check_catalog
 
 DEPTH = {b: i for i, b in enumerate(BASES)}  # 4.2 structural content-depth order
 UNSUPPORTED = "unsupported"
@@ -38,6 +39,7 @@ def rejected_result(tokens):
 
 def appraise(normalized_input, profiles):
     """Appraise one logical AppraisalInput against a profile catalog (8.4). Mutates neither."""
+    check_catalog(profiles)  # harness precondition: the catalog has the documented shape (raises ValueError)
     try:
         n = ingest(normalized_input, profiles)
     except Rejection as rejection:
