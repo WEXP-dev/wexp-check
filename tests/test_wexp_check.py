@@ -254,12 +254,16 @@ class OrderedChecks(unittest.TestCase):
             fixture(I, ["intent"], boundary_finding=base["boundary_finding"] | {"ceiling_base": "x"}),
             fixture(I, ["intent"], counter_evidence=[counter("blocked", [I])]),
             fixture(I, ["intent"], profile_evaluation_gaps=[gap("E_IV_NOT_EVALUATED", "all", "u", "L")]),
-            fixture(I, ["intent"], profile_evaluation_gaps=[
-                gap("E_IV_NOT_EVALUATED", [I], "u", "L", current_scope_capability="target-binding")]),
         ]
         for data in cases:
             with self.subTest(data=data):
                 self.reject(data, "E_MALFORMED_NORMALIZED_INPUT")
+        # Moved after the first corpus run (see CHANGES-AFTER-RUN.md, P18): a marker naming a recognized
+        # initial capability other than authenticity or composition is a disallowed marker, section 6
+        # cross-field check, not an unknown closed-enum value.
+        self.reject(fixture(I, ["intent"], profile_evaluation_gaps=[
+            gap("E_IV_NOT_EVALUATED", [I], "u", "L", current_scope_capability="target-binding")]),
+            "E_PROFILE_MAPPING_INVALID")
 
     def test_check4_cross_field(self):
         bf = fixture(I, ["intent"])["boundary_finding"]

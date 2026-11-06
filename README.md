@@ -80,3 +80,33 @@ diagnostic matrix rows.
 ## License
 
 Apache License 2.0; see `LICENSE`.
+
+## Comparison record
+
+The code was frozen first ([`FREEZE.md`](FREEZE.md): SHA-256 of every file, committed before
+any corpus run) and then run, unchanged, against the two published Core-02 corpora of
+`WEXP-dev/wexp-vectors`: `WEXP-CORE-02-VECTORS-001` (89 cases, package revision 2, lock
+commit `d6827a5e`) and `WEXP-CORE-02-VECTORS-002` (35 cases, section 7 boundary matrix).
+Every result was compared component by component, over all twenty members and with set
+semantics for the collections the harness defines as sets, both with the frozen expected
+results and with the output of `wexp_ref.core02` at `WEXP-dev/wexp-ref` commit `56289024`.
+
+| run | code | set 001: equal to expected / to wexp-ref | set 002: equal to expected / to wexp-ref |
+|---|---|---|---|
+| 1 | as frozen | 87 / 87 of 89 | 35 / 35 of 35 |
+| 2 | after two reading alignments | 89 / 89 of 89 | 35 / 35 of 35 |
+
+The two run-1 differences, P08 and P18, are both places where the published text admits two
+readings and this implementation, written without seeing any corpus, took the reading the
+corpus did not. Neither is a defect of wexp-ref and neither is an error in a frozen
+expectation; an earlier independent re-derivation of the 89 expectations had already recorded
+exactly these two questions as open. [`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md) holds the
+classification, the two readings with the text they rest on, and the exact change made.
+[`RUN-RECORD.json`](RUN-RECORD.json) identifies the frozen commit, the code digests after the
+change, the runner and corpora compared against, and both runs;
+[`comparison-before-alignment.json`](comparison-before-alignment.json) and
+[`comparison.json`](comparison.json) are the per-case results of runs 1 and 2.
+
+Agreement with a corpus and with another implementation is what it says and nothing more:
+the specification remains the authority, the corpora are same-project work, and this record
+is not a statement about the correctness or completeness of any implementation.

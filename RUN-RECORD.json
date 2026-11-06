@@ -1,0 +1,84 @@
+{
+  "wexp_check_frozen_commit": "b28d00af6035bcb01352cd15eadec3eb2b3db100",
+  "freeze_record": "FREEZE.md",
+  "code_files_sha256_after_alignment": {
+    "tests/test_wexp_check.py": "8bdf707da6f13aa04a825d09f8553f567451ac13f46fe418312e85e89217d146",
+    "wexp_check/__init__.py": "ae4a9671e6bc22d8c3d591e36db00d1d0a069307fa1e0cf7afe030e0ddfe5a4a",
+    "wexp_check/__main__.py": "6554ab7c151809297825d9af16e0463dac6c6cc176c4912bd4e011ba8f048120",
+    "wexp_check/core.py": "d83ac0795f32b148acc45d924d9249647bc687b9f49f0f9658401f0cbc9e463e",
+    "wexp_check/ingress.py": "371af34defef1a4d42375a6f0531836050fff6802090e947466a4393c02a736b",
+    "wexp_check/tokens.py": "6e0c45e0ffddac18b7b7e6e4d0d28f39f08b98230243318b80794256b0db35ba"
+  },
+  "runner_compared_against": {
+    "repository": "WEXP-dev/wexp-ref",
+    "commit": "56289024c9ee748111f1f1d4f42728ffe04d8d69",
+    "appraiser_py_sha256": "e0ea740ce09a65cc6a48495a39730483da1f00583e1e864e6269a2eab4187ddd",
+    "checkout_clean": true
+  },
+  "corpora": {
+    "WEXP-CORE-02-VECTORS-001": {
+      "repository": "WEXP-dev/wexp-vectors",
+      "package_revision": 2,
+      "lock_commit": "d6827a5e08fdf0aabecee5c025c369273c438db5",
+      "corpus_json_sha256": "d5d2c9d54185f04ac59ac2b5642853a6ebd00c3d28a3239d62682186f5df323f",
+      "cases": 89
+    },
+    "WEXP-CORE-02-VECTORS-002": {
+      "repository": "WEXP-dev/wexp-vectors",
+      "branch_commit_not_yet_on_main": "e676fcbb869b5f22894020e01136b0ffc48e5ba8",
+      "corpus_json_sha256": "9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
+      "manifest_sha256": "3961528fd349b584285d181ce466e0447d4e9f69a223ab33a4a70b1d6fdff8cb",
+      "cases": 35
+    }
+  },
+  "interpreter": "CPython 3.12.13",
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "comparison_method": "component-wise over the twenty result members; collections the harness defines as sets compared as sets; Booleans distinct from numbers; null distinct from absent; each engine run in its own interpreter process; inputs checked for non-mutation",
+  "runs": [
+    {
+      "order": 1,
+      "code": "as frozen in b28d00af6035bcb01352cd15eadec3eb2b3db100",
+      "output": "comparison-before-alignment.json",
+      "set001": {
+        "equal_to_expected": 87,
+        "equal_to_wexp_ref": 87,
+        "of": 89,
+        "differing": [
+          "P08",
+          "P18"
+        ]
+      },
+      "set002": {
+        "equal_to_expected": 35,
+        "equal_to_wexp_ref": 35,
+        "of": 35,
+        "differing": []
+      }
+    },
+    {
+      "order": 2,
+      "code": "after the two alignments recorded in CHANGES-AFTER-RUN.md",
+      "output": "comparison.json",
+      "set001": {
+        "equal_to_expected": 89,
+        "equal_to_wexp_ref": 89,
+        "of": 89,
+        "differing": []
+      },
+      "set002": {
+        "equal_to_expected": 35,
+        "equal_to_wexp_ref": 35,
+        "of": 35,
+        "differing": []
+      }
+    }
+  ],
+  "divergence_classification": {
+    "P08": "text ambiguity (lone surrogate as text atom); same open question as the set 001 re-derivation record",
+    "P18": "text ambiguity (domain of current_scope_capability); same open question as the set 001 re-derivation record",
+    "wexp_ref_defects": [],
+    "expectation_errors": [],
+    "A1_to_A6_involved": []
+  },
+  "recorded_at_utc": "2026-11-06T19:28:04Z"
+}

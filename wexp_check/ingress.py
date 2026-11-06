@@ -59,8 +59,19 @@ def _malformed():
     return Rejection("E_MALFORMED_NORMALIZED_INPUT")
 
 
-def _text(v):
+def _is_scalar_text(v):
+    # 13: opaque atoms are exact Unicode scalar text; a lone surrogate is not a Unicode scalar value
     if not isinstance(v, str):
+        return False
+    try:
+        v.encode("utf-8")
+    except UnicodeEncodeError:
+        return False
+    return True
+
+
+def _text(v):
+    if not _is_scalar_text(v):
         raise _malformed()
     return v
 
@@ -81,7 +92,7 @@ def _token(v):
 
 def _scoped(v):
     # 6.1: profile-scoped atom == ordered pair (profile_identifier, local_value) of text atoms
-    if not isinstance(v, list) or len(v) != 2 or not all(isinstance(x, str) for x in v):
+    if not isinstance(v, list) or len(v) != 2 or not all(_is_scalar_text(x) for x in v):
         raise _malformed()
     return list(v)
 
@@ -127,7 +138,7 @@ def _capability(v):
     if isinstance(v, str):
         return _enum(INITIAL_CAPABILITIES)(v)
     # 12: extension key == pair of two non-empty text atoms
-    if not isinstance(v, list) or len(v) != 2 or not all(isinstance(x, str) and x for x in v):
+    if not isinstance(v, list) or len(v) != 2 or not all(_is_scalar_text(x) and x for x in v):
         raise _malformed()
     return list(v)
 
@@ -145,7 +156,7 @@ _QUALIFIER_FINDING = _record(_SCOPE | {
 _RELATION = _record({"profile_identifier": _text, "relation_token": _text, "subject_ref": _scoped,
                      "object_ref": _scoped, "basis_refs": _set(_scoped), "limitations": _set(_scoped)})
 _COUNTER = _record({"status": _enum(COUNTER_STATUS), "affected_claims": _affected} | _SETS)
-_GAP = _record(_SCOPE | {"token": _token, "current_scope_capability": _enum(CURRENT_SCOPE),
+_GAP = _record(_SCOPE | {"token": _token, "current_scope_capability": _enum(INITIAL_CAPABILITIES),
                          "affected_claims": _affected, "basis_refs": _set(_scoped),
                          "limitations": _set(_scoped)},
                optional=("current_scope_capability",))
@@ -251,6 +262,8 @@ def _cross_field(n, catalog):
             raise invalid
         _, marker_capability = category(g["token"], "evaluation-gap")
         if "current_scope_capability" in g:
+            if g["current_scope_capability"] not in CURRENT_SCOPE:  # 6: recognized initial capability that is not authenticity or composition is a disallowed marker (cross-field)
+                raise invalid
             if g["current_scope_capability"] != marker_capability:  # 6, 15: marker-token mismatch
                 raise invalid
             markers.add(marker_capability)
