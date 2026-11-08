@@ -89,6 +89,78 @@
         "of": 35,
         "differing": []
       }
+    },
+    {
+      "order": 4,
+      "kind": "negative control of scripts/compare_corpora.py (no wexp_check code involved)",
+      "recorded_at_utc": "2026-11-08T22:31:00Z",
+      "pins": {
+        "wexp_check_code": "391eda1787f35a3ad1a8906f38462e5715d8b750 (wexp_check/ unchanged since)",
+        "wexp_ref": "56289024c9ee748111f1f1d4f42728ffe04d8d69",
+        "wexp_vectors": "edd67056873502a2c3cecf5dd2b8db71271c2f57",
+        "interpreter": "CPython 3.12"
+      },
+      "tampered_copies": {
+        "changed_expectation": "temporary copy of WEXP-CORE-02-VECTORS-002/corpus.json with case B01 expected.asserted_claim {'base': 'execution', 'qualifiers': []} replaced by null; sha256 95f09d09bf079ad078e0db2549fc304021baa44fcb93a27866c4cdc96327ea88",
+        "deleted_case": "temporary copy of WEXP-CORE-02-VECTORS-002/corpus.json with case B06 removed; sha256 01f07cc230afb50e55f7f2538f90b5565697b4dc4c8febca6796ee9d458b5b03",
+        "committed_corpora": "not modified"
+      },
+      "attempt_a_driver_as_pushed_391eda17": {
+        "result": "control failed: exit status 0 in both cases; the changed expectation was printed (B01) but not failed; the deleted case was not reported (34/34)",
+        "changed_expectation_output": [
+          "WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89",
+          "WEXP-CORE-02-VECTORS-002 wexp_check==expected 34/35; wexp_check==wexp_ref 35/35",
+          "   B01 ['asserted_claim'] None",
+          "rc=0"
+        ],
+        "deleted_case_output": [
+          "WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89",
+          "WEXP-CORE-02-VECTORS-002 wexp_check==expected 34/34; wexp_check==wexp_ref 34/34",
+          "rc=0"
+        ]
+      },
+      "attempt_b_driver_after_fix": {
+        "command": "python3 -B scripts/compare_corpora.py --baseline comparison.json . <wexp-ref> <out.json> <set 001 corpus.json> <tampered set 002 corpus.json>",
+        "result": "control passed: exit status 1 in both cases, the case named",
+        "changed_expectation_output": [
+          "WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89",
+          "WEXP-CORE-02-VECTORS-002 wexp_check==expected 34/35; wexp_check==wexp_ref 35/35",
+          "   B01 ['asserted_claim'] None",
+          "FAIL WEXP-CORE-02-VECTORS-002 case B01: check_equals_expected, ref_equals_expected (components ['asserted_claim'])",
+          "FAIL WEXP-CORE-02-VECTORS-002 case B01: differs from the baseline in check_equals_expected, ref_equals_expected",
+          "FAIL WEXP-CORE-02-VECTORS-002: corpus sha256 95f09d09bf079ad078e0db2549fc304021baa44fcb93a27866c4cdc96327ea88 differs from the baseline 9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
+          "rc=1"
+        ],
+        "deleted_case_output": [
+          "WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89",
+          "WEXP-CORE-02-VECTORS-002 wexp_check==expected 34/34; wexp_check==wexp_ref 34/34",
+          "FAIL WEXP-CORE-02-VECTORS-002 case B06: in the baseline, missing from the corpus",
+          "FAIL WEXP-CORE-02-VECTORS-002: corpus sha256 01f07cc230afb50e55f7f2538f90b5565697b4dc4c8febca6796ee9d458b5b03 differs from the baseline 9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
+          "rc=1"
+        ],
+        "without_baseline_manifest_beside_copy": {
+          "changed_expectation_output": [
+            "WEXP-CORE-02-VECTORS-002 wexp_check==expected 34/35; wexp_check==wexp_ref 35/35",
+            "   B01 ['asserted_claim'] None",
+            "FAIL WEXP-CORE-02-VECTORS-002: corpus.json sha256 95f09d09bf079ad078e0db2549fc304021baa44fcb93a27866c4cdc96327ea88 differs from manifest expanded_corpus_sha256 9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
+            "FAIL WEXP-CORE-02-VECTORS-002 case B01: check_equals_expected, ref_equals_expected (components ['asserted_claim'])",
+            "rc=1"
+          ],
+          "deleted_case_output": [
+            "WEXP-CORE-02-VECTORS-002 wexp_check==expected 34/34; wexp_check==wexp_ref 34/34",
+            "FAIL WEXP-CORE-02-VECTORS-002: 34 cases, manifest case_count 35",
+            "FAIL WEXP-CORE-02-VECTORS-002: corpus.json sha256 01f07cc230afb50e55f7f2538f90b5565697b4dc4c8febca6796ee9d458b5b03 differs from manifest expanded_corpus_sha256 9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
+            "rc=1"
+          ],
+          "note": "without --baseline a deleted case is detected through manifest case_count and digest but cannot be named; REPRODUCE.md uses --baseline"
+        },
+        "positive_run_same_driver": {
+          "set001": "89/89 expected, 89/89 wexp_ref",
+          "set002": "35/35 expected, 35/35 wexp_ref",
+          "exit_status": 0,
+          "per_case_rows_identical_to_comparison_json": true
+        }
+      }
     }
   ],
   "divergence_classification": {

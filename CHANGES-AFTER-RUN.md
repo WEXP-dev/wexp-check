@@ -82,3 +82,13 @@ any corpus result, and the comparison was re-run afterwards as run 3 (`RUN-RECOR
 Also in the same commit: `pyproject.toml` build floor raised to `setuptools>=77` (SPDX license
 string), `-B` in the test subprocess and a `.gitignore`, the wording of one sentence in
 `FREEZE.md`, the citations and set 002 status in `README.md`, and `docs/REPRESENTATION.md`.
+
+## After the push of `391eda17`: the comparison driver
+
+`scripts/compare_corpora.py` (not part of `wexp_check`) exited with status 0 whatever it found, and
+a case removed from a corpus went unnoticed. A negative control showed both (run 4, attempt a). The
+driver now exits non-zero and names the set and case when any case disagrees, when a case is missing
+from or added to the `--baseline` comparison file, when an engine raises or mutates its input, and
+when a `corpus.json` differs from the case count or digest of the `manifest.json` beside it. The
+per-case output of a passing run is unchanged (identical to `comparison.json`). No file of
+`wexp_check/` and no expectation changed.

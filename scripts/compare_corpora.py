@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 """Compare wexp_check and wexp_ref.core02 against frozen Core-02 corpora, component by component.
 
-usage: python3 -B scripts/compare_corpora.py <wexp-check root> <wexp-ref root> <output.json> <corpus.json> [<corpus.json> ...]
+usage: python3 -B scripts/compare_corpora.py [--baseline <comparison.json>] <wexp-check root> <wexp-ref root> <output.json> <corpus.json> [<corpus.json> ...]
 
 Each engine runs in its own interpreter process with only its own code on PYTHONPATH. Collections the
 harness defines as sets are compared as sets; Booleans stay distinct from numbers; null from absence.
-The script computes no expectation; it only compares saved expectations with observed results."""
+The script computes no expectation; it only compares saved expectations with observed results.
+
+Exit status is 0 only if every case of every corpus has wexp_check equal to the saved expectation and to
+wexp_ref, no engine raised or mutated its input, each corpus.json matches the case_count and
+expanded_corpus_sha256 of the manifest.json beside it (when present), and, with --baseline, each set has
+exactly the case identifiers and per-case results of that earlier comparison file. Every failure names
+the set and, where one exists, the case."""
 import json, subprocess, sys, hashlib, platform
 from pathlib import Path
-WC = Path(sys.argv[1]).resolve(); WR = Path(sys.argv[2]).resolve()/'src'; OUT = Path(sys.argv[3]).resolve()
+ARGS = sys.argv[1:]; BASELINE = None
+if ARGS[:1] == ['--baseline']: BASELINE = json.loads(Path(ARGS[1]).read_bytes()); ARGS = ARGS[2:]
+WC = Path(ARGS[0]).resolve(); WR = Path(ARGS[1]).resolve()/'src'; OUT = Path(ARGS[2]).resolve()
 SETS = {}
-for arg in sys.argv[4:]:
+for arg in ARGS[3:]:
     p = Path(arg).resolve(); SETS[json.loads(p.read_bytes())['id']] = p
 SET_FIELDS = {'qualifiers','profile_identifiers','basis_refs','reasons','limitations','base_findings','qualifier_findings','recorder_relations','counter_evidence','evaluation_scope','profile_evaluation_gaps','inherited_limitations','fatal_conditions','affected_claims','fatal_reasons','substantive_reasons','evaluation_gaps','evaluation_gap_entries','supported_claims','maximal_supported_claims','support_entries','support_relations'}
 def enc(v): return json.dumps(v, ensure_ascii=True, sort_keys=True, separators=(',',':'), allow_nan=False)
@@ -43,8 +51,14 @@ def run(module, path, corpus):
     if r.returncode: raise SystemExit(module + ' driver failed: ' + r.stderr[-800:])
     return json.loads(r.stdout)
 report = {'python': platform.python_version(), 'sets': {}}
+FAIL = []
 for sid, cpath in SETS.items():
     corpus = json.loads(cpath.read_bytes())
+    man = cpath.parent/'manifest.json'
+    if man.is_file():
+        m = json.loads(man.read_bytes()); digest = hashlib.sha256(cpath.read_bytes()).hexdigest()
+        if m.get('case_count') != len(corpus['cases']): FAIL.append(f"{sid}: {len(corpus['cases'])} cases, manifest case_count {m.get('case_count')}")
+        if m.get('expanded_corpus_sha256') != digest: FAIL.append(f"{sid}: corpus.json sha256 {digest} differs from manifest expanded_corpus_sha256 {m.get('expanded_corpus_sha256')}")
     chk = run('wexp_check', WC, cpath); ref = run('wexp_ref', WR, cpath)
     rows = []; n_eq_exp = n_eq_ref = 0
     for c in corpus['cases']:
@@ -61,5 +75,23 @@ for sid, cpath in SETS.items():
     print(sid, f'wexp_check==expected {n_eq_exp}/{len(rows)}; wexp_check==wexp_ref {n_eq_ref}/{len(rows)}')
     for r in rows:
         if not r['check_equals_expected']: print('  ', r['id'], r.get('differing_components'), r['check_error'])
+        bad = [k for k in ('check_equals_expected','check_equals_ref','ref_equals_expected') if not r[k]]
+        if bad or r['check_error'] or r.get('check_mutated_input'): FAIL.append(f"{sid} case {r['id']}: " + ', '.join(bad + (['check_error'] if r['check_error'] else []) + (['check_mutated_input'] if r.get('check_mutated_input') else [])) + (f" (components {r['differing_components']})" if r.get('differing_components') else ''))
+    if BASELINE is not None:
+        base = BASELINE.get('sets', {}).get(sid)
+        if base is None: FAIL.append(f'{sid}: not in the baseline')
+        else:
+            brow = {r['id']: r for r in base['rows']}; now = {r['id']: r for r in rows}
+            for cid in sorted(brow.keys() - now.keys()): FAIL.append(f'{sid} case {cid}: in the baseline, missing from the corpus')
+            for cid in sorted(now.keys() - brow.keys()): FAIL.append(f'{sid} case {cid}: in the corpus, not in the baseline')
+            for cid in sorted(brow.keys() & now.keys()):
+                diff = [k for k in ('check_equals_expected','check_equals_ref','ref_equals_expected') if brow[cid].get(k) != now[cid].get(k)]
+                if diff: FAIL.append(f'{sid} case {cid}: differs from the baseline in ' + ', '.join(diff))
+            if base.get('corpus_sha256') != report['sets'][sid]['corpus_sha256']: FAIL.append(f"{sid}: corpus sha256 {report['sets'][sid]['corpus_sha256']} differs from the baseline {base.get('corpus_sha256')}")
+if BASELINE is not None:
+    for sid in sorted(BASELINE.get('sets', {}).keys() - SETS.keys()): FAIL.append(f'{sid}: in the baseline, no corpus given')
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(json.dumps(report, indent=1, sort_keys=True) + '\n')
+if FAIL:
+    for f in FAIL: print('FAIL', f)
+    sys.exit(1)
