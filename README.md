@@ -91,7 +91,7 @@ The code was frozen first ([`FREEZE.md`](FREEZE.md): SHA-256 of every file, comm
 any corpus run) and then run, unchanged, against two Core-02 corpora of
 `WEXP-dev/wexp-vectors`: the published `WEXP-CORE-02-VECTORS-001` (89 cases, package revision 2,
 lock commit `d6827a5e`) and `WEXP-CORE-02-VECTORS-002` (35 cases, section 7 boundary matrix) at
-branch commit `e676fcbb`, which is not yet on that repository's main branch.
+branch commit `e676fcbb` (on that repository's main branch since 2026-11-08, merge commit `34b0b351`).
 Every result was compared component by component, over all twenty members and with set
 semantics for the collections the harness defines as sets, both with the frozen expected
 results and with the output of `wexp_ref.core02` at `WEXP-dev/wexp-ref` commit `56289024`.
@@ -106,7 +106,7 @@ readings and this implementation, written without seeing any corpus, took the re
 corpus did not. Neither is a defect of wexp-ref and neither is an error in a frozen
 expectation; an earlier independent re-derivation of the 89 expectations (`WEXP-dev/wexp-vectors`,
 branch `evidence/core-02-set-001-rederivation`, commit `a936c891`, directory
-`evidence/core-02-set-001-rederivation/`, not yet on main) had already recorded exactly these two
+`evidence/core-02-set-001-rederivation/`, on main since 2026-11-08, merge commit `edd67056`) had already recorded exactly these two
 questions as open. [`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md) holds the
 classification, the two readings with the text they rest on, and the exact change made.
 [`RUN-RECORD.json`](RUN-RECORD.json) identifies the frozen commit, the code digests after the
