@@ -13,12 +13,23 @@ python3 -B scripts/compare_corpora.py --baseline comparison.json . /tmp/wexp-ref
     /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json
 ```
 
-Expected output of the last command (the counts recorded in `RUN-RECORD.json`, run 3):
+Expected output of the last command (the counts recorded in `RUN-RECORD.json`, run 3; the two
+`imported from` lines, printed once per corpus, name the files the engines were actually loaded from
+and must point into the two checkouts given on the command line):
 
 ```
+wexp_check imported from <this checkout>/wexp_check/__init__.py
+wexp_ref imported from /tmp/wexp-ref/src/wexp_ref/core02/appraiser.py
 WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89
+wexp_check imported from <this checkout>/wexp_check/__init__.py
+wexp_ref imported from /tmp/wexp-ref/src/wexp_ref/core02/appraiser.py
 WEXP-CORE-02-VECTORS-002 wexp_check==expected 35/35; wexp_check==wexp_ref 35/35
 ```
+
+Each engine runs in a child interpreter started with `-I`, working directory and `sys.path` set to its
+own checkout only; the driver stops if an engine was imported from anywhere else (run 5 in
+`RUN-RECORD.json` is the control). The output file records the two import paths, relative to the
+checkouts, under `engines`.
 
 The corpora: `WEXP-CORE-02-VECTORS-001` is on `wexp-vectors` main (package revision 2, lock
 `d6827a5e`, `corpus.json` SHA-256 `d5d2c9d5…`); `WEXP-CORE-02-VECTORS-002` (`corpus.json` SHA-256

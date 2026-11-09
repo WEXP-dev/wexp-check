@@ -161,6 +161,65 @@
           "per_case_rows_identical_to_comparison_json": true
         }
       }
+    },
+    {
+      "order": 5,
+      "kind": "control of scripts/compare_corpora.py import isolation (no wexp_check code changed)",
+      "recorded_at_utc": "2026-11-09T02:20:00Z",
+      "defect": "the child interpreter was started with -c and inherited the working directory, so Python put the working directory first on sys.path; run from this repository's root, the driver imported wexp_check from the root instead of from the checkout given as the first argument",
+      "demonstration_driver_as_at_6ce348b9": {
+        "command": "cd <this repository at 6ce348b9> && python3 -B scripts/compare_corpora.py <checkout of b28d00af> <wexp-ref 56289024> <out.json> <set 001 corpus.json> <set 002 corpus.json>",
+        "output": [
+          "WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89",
+          "WEXP-CORE-02-VECTORS-002 wexp_check==expected 35/35; wexp_check==wexp_ref 35/35",
+          "rc=0"
+        ],
+        "result": "wrong: the frozen code b28d00af differs from the expectations in P08 and P18 (run 1); the counts are those of the root checkout"
+      },
+      "fix": "the child runs with -I (no working directory, no PYTHONPATH, no user site on sys.path), cwd set to the given checkout, PYTHONPATH naming only that checkout, the checkout inserted into sys.path by the driver; the child returns the engine module's __file__, the parent prints it, fails if it is outside the given checkout, and records it relative to the checkout under 'engines' in the output",
+      "pins": {
+        "wexp_ref": "56289024c9ee748111f1f1d4f42728ffe04d8d69",
+        "wexp_vectors": "edd67056873502a2c3cecf5dd2b8db71271c2f57 (set 001 corpus.json d5d2c9d5..., set 002 corpus.json 9e301333...)",
+        "interpreter": "CPython 3.12",
+        "working_directory": "an empty directory outside every checkout"
+      },
+      "fixed_driver_from_neutral_directory": {
+        "b28d00af6035bcb01352cd15eadec3eb2b3db100 (as frozen)": {
+          "imported": "<checkout b28d00af>/wexp_check/__init__.py",
+          "set001": "87/89 expected, 87/89 wexp_ref; P08, P18 differ in fatal_reasons",
+          "set002": "35/35 expected, 35/35 wexp_ref",
+          "exit_status": 1
+        },
+        "25ec856e053d8ab40ed60bb88b70c84768d45e34": {
+          "imported": "<checkout 25ec856>/wexp_check/__init__.py",
+          "set001": "89/89 expected, 89/89 wexp_ref",
+          "set002": "35/35 expected, 35/35 wexp_ref",
+          "exit_status": 0,
+          "note": "wexp_check/ at 25ec856 already carries the two alignments of 7b5ab8e and is byte-identical to main; 87/89 belongs to the freeze commit b28d00af, not to 25ec856"
+        },
+        "6ce348b921854b4b102b75be6dc6165a926da03d (main before this change; wexp_check/ unchanged since 25ec856)": {
+          "imported": "<checkout main>/wexp_check/__init__.py",
+          "set001": "89/89 expected, 89/89 wexp_ref",
+          "set002": "35/35 expected, 35/35 wexp_ref",
+          "exit_status": 0,
+          "with_baseline": "comparison.json; per-case rows identical"
+        }
+      },
+      "fixed_driver_in_the_defect_scenario": {
+        "command": "cd <this repository> && python3 -B scripts/compare_corpora.py <checkout of b28d00af> <wexp-ref> <out.json> <set 001> <set 002>",
+        "imported": "<checkout b28d00af>/wexp_check/__init__.py",
+        "output": [
+          "WEXP-CORE-02-VECTORS-001 wexp_check==expected 87/89; wexp_check==wexp_ref 87/89",
+          "   P08 ['fatal_reasons'] None",
+          "   P18 ['fatal_reasons'] None",
+          "WEXP-CORE-02-VECTORS-002 wexp_check==expected 35/35; wexp_check==wexp_ref 35/35",
+          "FAIL WEXP-CORE-02-VECTORS-001 case P08: check_equals_expected, check_equals_ref (components ['fatal_reasons'])",
+          "FAIL WEXP-CORE-02-VECTORS-001 case P18: check_equals_expected, check_equals_ref (components ['fatal_reasons'])",
+          "rc=1"
+        ],
+        "result": "correct: the given checkout is the one appraised"
+      },
+      "unit_tests": "Ran 37 tests, OK"
     }
   ],
   "divergence_classification": {

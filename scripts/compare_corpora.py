@@ -3,9 +3,14 @@
 
 usage: python3 -B scripts/compare_corpora.py [--baseline <comparison.json>] <wexp-check root> <wexp-ref root> <output.json> <corpus.json> [<corpus.json> ...]
 
-Each engine runs in its own interpreter process with only its own code on PYTHONPATH. Collections the
-harness defines as sets are compared as sets; Booleans stay distinct from numbers; null from absence.
-The script computes no expectation; it only compares saved expectations with observed results.
+Each engine runs in its own interpreter process started with -I (isolated: no current directory, no
+PYTHONPATH, no user site on sys.path), with its working directory set to the given checkout and the
+checkout inserted into sys.path by the driver itself; PYTHONPATH in the child environment names only
+that checkout. The child reports the file the engine module was actually imported from; the run stops
+if that file is not inside the given checkout. The path is printed for every engine and recorded in the
+output relative to the checkout. Collections the harness defines as sets are compared as sets; Booleans
+stay distinct from numbers; null from absence. The script computes no expectation; it only compares
+saved expectations with observed results.
 
 Exit status is 0 only if every case of every corpus has wexp_check equal to the saved expectation and to
 wexp_ref, no engine raised or mutated its input, each corpus.json matches the case_count and
@@ -30,27 +35,37 @@ def logical(v, f=None):
 def same(a,b): return enc(logical(a)) == enc(logical(b))
 DRIVER = r'''
 import json, sys
+sys.path[:0] = [sys.argv[3]]
 corpus = json.load(open(sys.argv[2]))
 mod = sys.argv[1]
 if mod == 'wexp_check':
+    import wexp_check as engine
     from wexp_check import appraise
 else:
+    import wexp_ref.core02.appraiser as engine
     from wexp_ref.core02.appraiser import appraise
-out = {}
+out = {'module_file': engine.__file__, 'results': {}}
+out_cases = out['results']
 for c in corpus['cases']:
     inp = json.loads(json.dumps(c['input'])); prof = json.loads(json.dumps(c.get('profiles', corpus['profiles'])))
     try:
-        out[c['id']] = {'result': appraise(inp, prof), 'error': None}
+        out_cases[c['id']] = {'result': appraise(inp, prof), 'error': None}
     except Exception as e:
-        out[c['id']] = {'result': None, 'error': type(e).__name__ + ': ' + str(e)[:300]}
-    if json.dumps(inp, sort_keys=True) != json.dumps(c['input'], sort_keys=True): out[c['id']]['input_mutated'] = True
+        out_cases[c['id']] = {'result': None, 'error': type(e).__name__ + ': ' + str(e)[:300]}
+    if json.dumps(inp, sort_keys=True) != json.dumps(c['input'], sort_keys=True): out_cases[c['id']]['input_mutated'] = True
 print(json.dumps(out, sort_keys=True))
 '''
+ENGINES = {}
 def run(module, path, corpus):
-    r = subprocess.run([sys.executable, '-B', '-c', DRIVER, module, str(corpus)], env={'PYTHONPATH': str(path), 'PATH': '/usr/bin:/bin'}, capture_output=True, text=True)
+    r = subprocess.run([sys.executable, '-I', '-B', '-c', DRIVER, module, str(corpus), str(path)], cwd=str(path), env={'PYTHONPATH': str(path), 'PATH': '/usr/bin:/bin'}, capture_output=True, text=True)
     if r.returncode: raise SystemExit(module + ' driver failed: ' + r.stderr[-800:])
-    return json.loads(r.stdout)
-report = {'python': platform.python_version(), 'sets': {}}
+    out = json.loads(r.stdout); mfile = Path(out['module_file']).resolve()
+    if not mfile.is_relative_to(path): raise SystemExit(f'{module} was imported from {mfile}, outside the given checkout {path}')
+    rel = str(mfile.relative_to(path))
+    if ENGINES.setdefault(module, rel) != rel: raise SystemExit(f'{module} imported from {rel} after {ENGINES[module]}')
+    print(f'{module} imported from {mfile}')
+    return out['results']
+report = {'python': platform.python_version(), 'engines': ENGINES, 'sets': {}}
 FAIL = []
 for sid, cpath in SETS.items():
     corpus = json.loads(cpath.read_bytes())
