@@ -1,0 +1,102 @@
+{
+  "files": {
+    "comparison.extracted-from-log.json": {
+      "bytes": 20046,
+      "matches_digest_printed_in_log": true,
+      "sha256": "294f4cdc047994b838ede57d655beab8ec8ef3c05342903cc62d8884e1a0c9ab",
+      "source": "extracted from job-129779506135.log by extract_comparison_from_log.py; not a downloaded artifact (the run published no artifacts); the corpus job of run 42801235872 printed byte-identical output"
+    },
+    "extract_comparison_from_log.py": {
+      "bytes": 2368,
+      "sha256": "c22c8beed29e122e48f77a6a2aa103a1c0ba041be3d64097af96e12d37b25374",
+      "source": "written for this record; reads the log as bytes and never modifies it"
+    },
+    "job-129778987815.log": {
+      "bytes": 60184,
+      "retrieved_utc": "2026-11-10T13:49:13Z",
+      "sha256": "657b3160c2632ab5d88b887e81d333d6d6b61b24b3f4a162f465495d86cebd87",
+      "source": "GitHub API, GET /repos/Laurent-Lemonnier/dps-scitt-decision-layer/actions/jobs/129778987815/logs (raw bytes, gh api --allow-escape-sequences)"
+    },
+    "job-129779506135.log": {
+      "bytes": 60185,
+      "retrieved_utc": "2026-11-10T13:49:06Z",
+      "sha256": "d694dd4a39e2d5dc782b6b27d8e7297d881e0fdca1a2f3d38c7f08ab3028adc4",
+      "source": "GitHub API, GET /repos/Laurent-Lemonnier/dps-scitt-decision-layer/actions/jobs/129779506135/logs (raw bytes, gh api --allow-escape-sequences)"
+    },
+    "run-42801235872.json": {
+      "bytes": 3517,
+      "retrieved_utc": "2026-11-10T13:48:18Z",
+      "sha256": "50d36d7bfbe3e42fac2eed51560a7c2897cb936ba0209842d2b0f7a651a2c701",
+      "source": "GitHub API, gh run view 42801235872 --json ..."
+    },
+    "run-42801386609.json": {
+      "bytes": 3710,
+      "retrieved_utc": "2026-11-10T13:48:18Z",
+      "sha256": "e3628df1cf9d12a823c4b1d7dfc3afac5e5fdb9ff8203e8fd564cce2bea5d865",
+      "source": "GitHub API, gh run view 42801386609 --json ..."
+    },
+    "workflow-f57ea8bf30b88a4f6d8628d6ed9e7588561830ac.yml": {
+      "bytes": 3903,
+      "retrieved_utc": "2026-11-10T13:48:34Z",
+      "sha256": "4c31d99b316e53cddcc16f6fc6d19361376ab85ca05ddc5273b910c39add92cc",
+      "source": "GitHub API, GET /repos/Laurent-Lemonnier/dps-scitt-decision-layer/contents/.github/workflows/wexp-reproduce.yml?ref=f57ea8bf30b88a4f6d8628d6ed9e7588561830ac"
+    },
+    "workflow-f661d39f7d9191f536ea09b7f7c4bbcc70af6128.yml": {
+      "bytes": 4123,
+      "retrieved_utc": "2026-11-10T13:48:31Z",
+      "sha256": "a1d7f50d18694887748ab832bda2d65a37cb4b89b8959b3ba03936f9df682d04",
+      "source": "GitHub API, GET /repos/Laurent-Lemonnier/dps-scitt-decision-layer/contents/.github/workflows/wexp-reproduce.yml?ref=f661d39f7d9191f536ea09b7f7c4bbcc70af6128"
+    }
+  },
+  "format": "wexp-check-external-run-1",
+  "pins": {
+    "wexp_check": "a2fd1ffd68b234592979a8aa8965bd580ede4d76",
+    "wexp_ref": "56289024c9ee748111f1f1d4f42728ffe04d8d69",
+    "wexp_vectors": "edd67056873502a2c3cecf5dd2b8db71271c2f57"
+  },
+  "python": "3.12.16",
+  "reported": "email of 2026-11-10, 10:46 UTC",
+  "repository": "https://github.com/Laurent-Lemonnier/dps-scitt-decision-layer",
+  "reproducer": "Laurent Lemonnier",
+  "results": {
+    "WEXP-CORE-02-VECTORS-001": {
+      "cases": 89,
+      "wexp_check_equals_expected": 89,
+      "wexp_check_equals_wexp_ref": 89
+    },
+    "WEXP-CORE-02-VECTORS-002": {
+      "cases": 35,
+      "wexp_check_equals_expected": 35,
+      "wexp_check_equals_wexp_ref": 35
+    },
+    "comparison_sha256": "294f4cdc047994b838ede57d655beab8ec8ef3c05342903cc62d8884e1a0c9ab",
+    "engines_imported_from": {
+      "wexp_check": "wexp_check/__init__.py",
+      "wexp_ref": "wexp_ref/core02/appraiser.py"
+    },
+    "per_case_rows_identical_to_comparison_json": true,
+    "unit_tests": "Ran 37 tests, OK"
+  },
+  "runner": "GitHub-hosted ubuntu-24.04, actions/setup-python@v5",
+  "runs": {
+    "42801235872": {
+      "attempt": 1,
+      "conclusion": "failure (SCITT job only)",
+      "corpus_job_conclusion": "success",
+      "corpus_job_id": 129778987815,
+      "created_utc": "2026-11-10T10:41:12Z",
+      "head_sha": "f57ea8bf30b88a4f6d8628d6ed9e7588561830ac",
+      "url": "https://github.com/Laurent-Lemonnier/dps-scitt-decision-layer/actions/runs/42801235872"
+    },
+    "42801386609": {
+      "attempt": 1,
+      "conclusion": "success",
+      "corpus_job_conclusion": "success",
+      "corpus_job_id": 129779506135,
+      "created_utc": "2026-11-10T10:42:17Z",
+      "head_sha": "f661d39f7d9191f536ea09b7f7c4bbcc70af6128",
+      "url": "https://github.com/Laurent-Lemonnier/dps-scitt-decision-layer/actions/runs/42801386609"
+    }
+  },
+  "workflow": ".github/workflows/wexp-reproduce.yml"
+}
