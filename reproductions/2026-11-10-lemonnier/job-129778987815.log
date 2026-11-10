@@ -1,0 +1,1079 @@
+﻿2026-11-10T10:41:17.3941426Z Current runner version: '2.338.2'
+2026-11-10T10:41:17.3966841Z ##[group]Runner Image Provisioner
+2026-11-10T10:41:17.3967702Z Hosted Compute Agent
+2026-11-10T10:41:17.3968301Z Version: 20261028.624
+2026-11-10T10:41:17.3969055Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-10T10:41:17.3969799Z Build Date: 2026-10-28T21:51:42Z
+2026-11-10T10:41:17.3970576Z Worker ID: {329b52c4-1e94-4b8e-b41d-3245fecef318}
+2026-11-10T10:41:17.3971367Z Region: eastus
+2026-11-10T10:41:17.3971926Z Cloud: Azure
+2026-11-10T10:41:17.3972809Z ##[endgroup]
+2026-11-10T10:41:17.3974322Z ##[group]Operating System
+2026-11-10T10:41:17.3975078Z Ubuntu
+2026-11-10T10:41:17.3975649Z 24.04.5
+2026-11-10T10:41:17.3976169Z LTS
+2026-11-10T10:41:17.3976751Z ##[endgroup]
+2026-11-10T10:41:17.3977335Z ##[group]Runner Image
+2026-11-10T10:41:17.3978033Z Image: ubuntu-24.04
+2026-11-10T10:41:17.3978637Z Version: 20261101.360.1
+2026-11-10T10:41:17.3979941Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-10T10:41:17.3981504Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-10T10:41:17.3983132Z ##[endgroup]
+2026-11-10T10:41:17.3984356Z ##[group]GITHUB_TOKEN Permissions
+2026-11-10T10:41:17.3986562Z Contents: read
+2026-11-10T10:41:17.3987205Z Metadata: read
+2026-11-10T10:41:17.3988127Z ##[endgroup]
+2026-11-10T10:41:17.3990359Z Secret source: Actions
+2026-11-10T10:41:17.3991312Z Cache mode: write
+2026-11-10T10:41:17.3992599Z Prepare workflow directory
+2026-11-10T10:41:17.4326571Z Prepare all required actions
+2026-11-10T10:41:17.4375029Z Getting action download info
+2026-11-10T10:41:17.6559969Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-10T10:41:17.8745597Z Complete job name: wexp-check against wexp-ref, two corpora
+2026-11-10T10:41:17.9744546Z ##[group]Run actions/setup-python@v5
+2026-11-10T10:41:17.9745489Z with:
+2026-11-10T10:41:17.9745949Z   python-version: 3.12
+2026-11-10T10:41:17.9746474Z   check-latest: false
+2026-11-10T10:41:17.9750200Z   token: ***
+2026-11-10T10:41:17.9750679Z   update-environment: true
+2026-11-10T10:41:17.9751200Z   allow-prereleases: false
+2026-11-10T10:41:17.9751700Z   freethreaded: false
+2026-11-10T10:41:17.9752614Z ##[endgroup]
+2026-11-10T10:41:18.2889027Z ##[group]Installed versions
+2026-11-10T10:41:18.2967266Z (node:2211) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-10T10:41:18.2986338Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-10T10:41:18.2987281Z Successfully set up CPython (3.12.16)
+2026-11-10T10:41:18.2988444Z ##[endgroup]
+2026-11-10T10:41:18.3227015Z ##[group]Run set -eux
+2026-11-10T10:41:18.3227693Z [36;1mset -eux[0m
+2026-11-10T10:41:18.3228435Z [36;1mgit clone https://github.com/WEXP-dev/wexp-check.git wexp-check[0m
+2026-11-10T10:41:18.3229459Z [36;1mgit -C wexp-check checkout a2fd1ffd68b234592979a8aa8965bd580ede4d76[0m
+2026-11-10T10:41:18.3230495Z [36;1mgit clone https://github.com/WEXP-dev/wexp-ref.git /tmp/wexp-ref[0m
+2026-11-10T10:41:18.3231504Z [36;1mgit -C /tmp/wexp-ref checkout 56289024c9ee748111f1f1d4f42728ffe04d8d69[0m
+2026-11-10T10:41:18.3232938Z [36;1mgit clone https://github.com/WEXP-dev/wexp-vectors.git /tmp/wexp-vectors[0m
+2026-11-10T10:41:18.3234075Z [36;1mgit -C /tmp/wexp-vectors checkout edd67056873502a2c3cecf5dd2b8db71271c2f57[0m
+2026-11-10T10:41:18.3234945Z [36;1mpython3 --version[0m
+2026-11-10T10:41:18.3235819Z [36;1mfor d in wexp-check /tmp/wexp-ref /tmp/wexp-vectors; do git -C "$d" rev-parse HEAD; done[0m
+2026-11-10T10:41:18.3237433Z [36;1msha256sum /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json[0m
+2026-11-10T10:41:18.3271311Z shell: /usr/bin/bash -e {0}
+2026-11-10T10:41:18.3271906Z env:
+2026-11-10T10:41:18.3272854Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:18.3273787Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-10T10:41:18.3274983Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:18.3275813Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:18.3276637Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:18.3277473Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-10T10:41:18.3278190Z ##[endgroup]
+2026-11-10T10:41:18.3364567Z + git clone https://github.com/WEXP-dev/wexp-check.git wexp-check
+2026-11-10T10:41:18.3444920Z Cloning into 'wexp-check'...
+2026-11-10T10:41:18.5649890Z + git -C wexp-check checkout a2fd1ffd68b234592979a8aa8965bd580ede4d76
+2026-11-10T10:41:18.5680168Z Note: switching to 'a2fd1ffd68b234592979a8aa8965bd580ede4d76'.
+2026-11-10T10:41:18.5680937Z 
+2026-11-10T10:41:18.5681383Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-10T10:41:18.5682943Z changes and commit them, and you can discard any commits you make in this
+2026-11-10T10:41:18.5684017Z state without impacting any branches by switching back to a branch.
+2026-11-10T10:41:18.5684613Z 
+2026-11-10T10:41:18.5685015Z If you want to create a new branch to retain commits you create, you may
+2026-11-10T10:41:18.5685961Z do so (now or later) by using -c with the switch command. Example:
+2026-11-10T10:41:18.5686569Z 
+2026-11-10T10:41:18.5686821Z   git switch -c <new-branch-name>
+2026-11-10T10:41:18.5687218Z 
+2026-11-10T10:41:18.5687449Z Or undo this operation with:
+2026-11-10T10:41:18.5687814Z 
+2026-11-10T10:41:18.5688015Z   git switch -
+2026-11-10T10:41:18.5688434Z 
+2026-11-10T10:41:18.5689203Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-10T10:41:18.5689987Z 
+2026-11-10T10:41:18.5690707Z HEAD is now at a2fd1ff compare_corpora: isolate each engine to its own checkout; report the imported module path; run 5
+2026-11-10T10:41:18.5691988Z + git clone https://github.com/WEXP-dev/wexp-ref.git /tmp/wexp-ref
+2026-11-10T10:41:18.5700773Z Cloning into '/tmp/wexp-ref'...
+2026-11-10T10:41:18.8242733Z + git -C /tmp/wexp-ref checkout 56289024c9ee748111f1f1d4f42728ffe04d8d69
+2026-11-10T10:41:18.8296219Z Note: switching to '56289024c9ee748111f1f1d4f42728ffe04d8d69'.
+2026-11-10T10:41:18.8297211Z 
+2026-11-10T10:41:18.8297793Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-10T10:41:18.8299191Z changes and commit them, and you can discard any commits you make in this
+2026-11-10T10:41:18.8300754Z state without impacting any branches by switching back to a branch.
+2026-11-10T10:41:18.8302348Z 
+2026-11-10T10:41:18.8303333Z If you want to create a new branch to retain commits you create, you may
+2026-11-10T10:41:18.8305267Z do so (now or later) by using -c with the switch command. Example:
+2026-11-10T10:41:18.8306132Z 
+2026-11-10T10:41:18.8306505Z   git switch -c <new-branch-name>
+2026-11-10T10:41:18.8307089Z 
+2026-11-10T10:41:18.8307435Z Or undo this operation with:
+2026-11-10T10:41:18.8307999Z 
+2026-11-10T10:41:18.8308324Z   git switch -
+2026-11-10T10:41:18.8308743Z 
+2026-11-10T10:41:18.8309486Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-10T10:41:18.8310569Z 
+2026-11-10T10:41:18.8312099Z HEAD is now at 5628902 Core-02: reject JSON exponent overflow before appraisal; locked run from frozen corpus; lock to vectors#14 (#20)
+2026-11-10T10:41:18.8315443Z + git clone https://github.com/WEXP-dev/wexp-vectors.git /tmp/wexp-vectors
+2026-11-10T10:41:18.8316969Z Cloning into '/tmp/wexp-vectors'...
+2026-11-10T10:41:19.0946918Z + git -C /tmp/wexp-vectors checkout edd67056873502a2c3cecf5dd2b8db71271c2f57
+2026-11-10T10:41:19.1120829Z Note: switching to 'edd67056873502a2c3cecf5dd2b8db71271c2f57'.
+2026-11-10T10:41:19.1122862Z 
+2026-11-10T10:41:19.1124036Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-10T10:41:19.1126735Z changes and commit them, and you can discard any commits you make in this
+2026-11-10T10:41:19.1129556Z state without impacting any branches by switching back to a branch.
+2026-11-10T10:41:19.1131530Z 
+2026-11-10T10:41:19.1132765Z If you want to create a new branch to retain commits you create, you may
+2026-11-10T10:41:19.1135091Z do so (now or later) by using -c with the switch command. Example:
+2026-11-10T10:41:19.1136979Z 
+2026-11-10T10:41:19.1138072Z   git switch -c <new-branch-name>
+2026-11-10T10:41:19.1139185Z 
+2026-11-10T10:41:19.1139774Z Or undo this operation with:
+2026-11-10T10:41:19.1140562Z 
+2026-11-10T10:41:19.1141244Z   git switch -
+2026-11-10T10:41:19.1142058Z 
+2026-11-10T10:41:19.1143584Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-10T10:41:19.1145509Z 
+2026-11-10T10:41:19.1146795Z HEAD is now at edd6705 Add the independent re-derivation of WEXP-CORE-02-VECTORS-001 (#17)
+2026-11-10T10:41:19.1149135Z + python3 --version
+2026-11-10T10:41:19.1274509Z Python 3.12.16
+2026-11-10T10:41:19.1279194Z + for d in wexp-check /tmp/wexp-ref /tmp/wexp-vectors
+2026-11-10T10:41:19.1281759Z + git -C wexp-check rev-parse HEAD
+2026-11-10T10:41:19.1304475Z a2fd1ffd68b234592979a8aa8965bd580ede4d76
+2026-11-10T10:41:19.1307597Z + for d in wexp-check /tmp/wexp-ref /tmp/wexp-vectors
+2026-11-10T10:41:19.1310279Z + git -C /tmp/wexp-ref rev-parse HEAD
+2026-11-10T10:41:19.1322438Z 56289024c9ee748111f1f1d4f42728ffe04d8d69
+2026-11-10T10:41:19.1325638Z + for d in wexp-check /tmp/wexp-ref /tmp/wexp-vectors
+2026-11-10T10:41:19.1328647Z + git -C /tmp/wexp-vectors rev-parse HEAD
+2026-11-10T10:41:19.1339189Z edd67056873502a2c3cecf5dd2b8db71271c2f57
+2026-11-10T10:41:19.1345100Z + sha256sum /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json
+2026-11-10T10:41:19.1375561Z d5d2c9d54185f04ac59ac2b5642853a6ebd00c3d28a3239d62682186f5df323f  /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json
+2026-11-10T10:41:19.1383440Z 9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0  /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json
+2026-11-10T10:41:19.1499207Z ##[group]Run PYTHONPATH=. python3 -B -m unittest discover -s tests
+2026-11-10T10:41:19.1502380Z [36;1mPYTHONPATH=. python3 -B -m unittest discover -s tests[0m
+2026-11-10T10:41:19.1531971Z shell: /usr/bin/bash -e {0}
+2026-11-10T10:41:19.1533895Z env:
+2026-11-10T10:41:19.1535617Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.1538526Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-10T10:41:19.1541535Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.1544412Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.1547164Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.1549968Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-10T10:41:19.1552104Z ##[endgroup]
+2026-11-10T10:41:19.6333876Z .....................................
+2026-11-10T10:41:19.6337226Z ----------------------------------------------------------------------
+2026-11-10T10:41:19.6339323Z Ran 37 tests in 0.306s
+2026-11-10T10:41:19.6340076Z 
+2026-11-10T10:41:19.6340533Z OK
+2026-11-10T10:41:19.6514915Z ##[group]Run python3 -B scripts/compare_corpora.py --baseline comparison.json . /tmp/wexp-ref /tmp/comparison.json \
+2026-11-10T10:41:19.6518461Z [36;1mpython3 -B scripts/compare_corpora.py --baseline comparison.json . /tmp/wexp-ref /tmp/comparison.json \[0m
+2026-11-10T10:41:19.6521228Z [36;1m  /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json \[0m
+2026-11-10T10:41:19.6523857Z [36;1m  /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json[0m
+2026-11-10T10:41:19.6525615Z [36;1msha256sum /tmp/comparison.json[0m
+2026-11-10T10:41:19.6526871Z [36;1mcat /tmp/comparison.json[0m
+2026-11-10T10:41:19.6549667Z shell: /usr/bin/bash -e {0}
+2026-11-10T10:41:19.6550714Z env:
+2026-11-10T10:41:19.6551825Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.6554062Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-10T10:41:19.6556223Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.6557957Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.6559667Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-10T10:41:19.6561396Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-10T10:41:19.6563138Z ##[endgroup]
+2026-11-10T10:41:20.0211294Z wexp_check imported from /home/runner/work/dps-scitt-decision-layer/dps-scitt-decision-layer/wexp-check/wexp_check/__init__.py
+2026-11-10T10:41:20.0215541Z wexp_ref imported from /tmp/wexp-ref/src/wexp_ref/core02/appraiser.py
+2026-11-10T10:41:20.0301887Z WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89
+2026-11-10T10:41:20.0307830Z wexp_check imported from /home/runner/work/dps-scitt-decision-layer/dps-scitt-decision-layer/wexp-check/wexp_check/__init__.py
+2026-11-10T10:41:20.0313090Z wexp_ref imported from /tmp/wexp-ref/src/wexp_ref/core02/appraiser.py
+2026-11-10T10:41:20.0316658Z WEXP-CORE-02-VECTORS-002 wexp_check==expected 35/35; wexp_check==wexp_ref 35/35
+2026-11-10T10:41:20.0319412Z 294f4cdc047994b838ede57d655beab8ec8ef3c05342903cc62d8884e1a0c9ab  /tmp/comparison.json
+2026-11-10T10:41:20.0321888Z {
+2026-11-10T10:41:20.0323597Z  "engines": {
+2026-11-10T10:41:20.0325240Z   "wexp_check": "wexp_check/__init__.py",
+2026-11-10T10:41:20.0327037Z   "wexp_ref": "wexp_ref/core02/appraiser.py"
+2026-11-10T10:41:20.0328290Z  },
+2026-11-10T10:41:20.0329136Z  "python": "3.12.16",
+2026-11-10T10:41:20.0330082Z  "sets": {
+2026-11-10T10:41:20.0330999Z   "WEXP-CORE-02-VECTORS-001": {
+2026-11-10T10:41:20.0332074Z    "cases": 89,
+2026-11-10T10:41:20.0333355Z    "check_equals_expected": 89,
+2026-11-10T10:41:20.0334480Z    "check_equals_ref": 89,
+2026-11-10T10:41:20.0336137Z    "corpus_sha256": "d5d2c9d54185f04ac59ac2b5642853a6ebd00c3d28a3239d62682186f5df323f",
+2026-11-10T10:41:20.0337937Z    "rows": [
+2026-11-10T10:41:20.0338783Z     {
+2026-11-10T10:41:20.0339684Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0340860Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0343299Z      "check_error": null,
+2026-11-10T10:41:20.0344875Z      "id": "C01",
+2026-11-10T10:41:20.0346361Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0347977Z     },
+2026-11-10T10:41:20.0348797Z     {
+2026-11-10T10:41:20.0349677Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0350859Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0351934Z      "check_error": null,
+2026-11-10T10:41:20.0353193Z      "id": "C02",
+2026-11-10T10:41:20.0354147Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0355231Z     },
+2026-11-10T10:41:20.0356046Z     {
+2026-11-10T10:41:20.0356922Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0358085Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0359170Z      "check_error": null,
+2026-11-10T10:41:20.0360170Z      "id": "C03",
+2026-11-10T10:41:20.0361114Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0362443Z     },
+2026-11-10T10:41:20.0363297Z     {
+2026-11-10T10:41:20.0364177Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0365695Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0366798Z      "check_error": null,
+2026-11-10T10:41:20.0367779Z      "id": "C04",
+2026-11-10T10:41:20.0368719Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0369786Z     },
+2026-11-10T10:41:20.0370586Z     {
+2026-11-10T10:41:20.0371465Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0446602Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0448543Z      "check_error": null,
+2026-11-10T10:41:20.0450259Z      "id": "C05",
+2026-11-10T10:41:20.0451701Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0453764Z     },
+2026-11-10T10:41:20.0455130Z     {
+2026-11-10T10:41:20.0456603Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0458542Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0460325Z      "check_error": null,
+2026-11-10T10:41:20.0461972Z      "id": "C06",
+2026-11-10T10:41:20.0463888Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0465697Z     },
+2026-11-10T10:41:20.0466502Z     {
+2026-11-10T10:41:20.0467406Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0468569Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0469643Z      "check_error": null,
+2026-11-10T10:41:20.0470631Z      "id": "C07",
+2026-11-10T10:41:20.0471572Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0472958Z     },
+2026-11-10T10:41:20.0473762Z     {
+2026-11-10T10:41:20.0474622Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0475792Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0476860Z      "check_error": null,
+2026-11-10T10:41:20.0477839Z      "id": "C08",
+2026-11-10T10:41:20.0478842Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0479979Z     },
+2026-11-10T10:41:20.0480773Z     {
+2026-11-10T10:41:20.0481647Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0483065Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0484145Z      "check_error": null,
+2026-11-10T10:41:20.0485128Z      "id": "C09",
+2026-11-10T10:41:20.0486094Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0487136Z     },
+2026-11-10T10:41:20.0487933Z     {
+2026-11-10T10:41:20.0488813Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0489967Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0491041Z      "check_error": null,
+2026-11-10T10:41:20.0492029Z      "id": "C10",
+2026-11-10T10:41:20.0493289Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0494356Z     },
+2026-11-10T10:41:20.0495152Z     {
+2026-11-10T10:41:20.0496030Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0497176Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0498243Z      "check_error": null,
+2026-11-10T10:41:20.0499217Z      "id": "C11",
+2026-11-10T10:41:20.0500157Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0501208Z     },
+2026-11-10T10:41:20.0502020Z     {
+2026-11-10T10:41:20.0503092Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0504258Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0505338Z      "check_error": null,
+2026-11-10T10:41:20.0506320Z      "id": "C12",
+2026-11-10T10:41:20.0507272Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0508319Z     },
+2026-11-10T10:41:20.0509107Z     {
+2026-11-10T10:41:20.0509980Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0511251Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0512453Z      "check_error": null,
+2026-11-10T10:41:20.0513435Z      "id": "C13",
+2026-11-10T10:41:20.0514378Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0515451Z     },
+2026-11-10T10:41:20.0516277Z     {
+2026-11-10T10:41:20.0517152Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0518319Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0519388Z      "check_error": null,
+2026-11-10T10:41:20.0520388Z      "id": "C14",
+2026-11-10T10:41:20.0521342Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0522555Z     },
+2026-11-10T10:41:20.0523355Z     {
+2026-11-10T10:41:20.0524236Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0525415Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0526488Z      "check_error": null,
+2026-11-10T10:41:20.0527476Z      "id": "C15",
+2026-11-10T10:41:20.0528698Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0529764Z     },
+2026-11-10T10:41:20.0530566Z     {
+2026-11-10T10:41:20.0531437Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0532738Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0533821Z      "check_error": null,
+2026-11-10T10:41:20.0534801Z      "id": "C16",
+2026-11-10T10:41:20.0535745Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0536817Z     },
+2026-11-10T10:41:20.0537612Z     {
+2026-11-10T10:41:20.0538493Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0539663Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0540760Z      "check_error": null,
+2026-11-10T10:41:20.0541745Z      "id": "R01",
+2026-11-10T10:41:20.0542815Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0543863Z     },
+2026-11-10T10:41:20.0544658Z     {
+2026-11-10T10:41:20.0545533Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0546839Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0547915Z      "check_error": null,
+2026-11-10T10:41:20.0548895Z      "id": "R02",
+2026-11-10T10:41:20.0549838Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0550880Z     },
+2026-11-10T10:41:20.0551672Z     {
+2026-11-10T10:41:20.0552688Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0553841Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0554903Z      "check_error": null,
+2026-11-10T10:41:20.0555879Z      "id": "R03",
+2026-11-10T10:41:20.0556827Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0557883Z     },
+2026-11-10T10:41:20.0558686Z     {
+2026-11-10T10:41:20.0559555Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0560711Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0561777Z      "check_error": null,
+2026-11-10T10:41:20.0562873Z      "id": "R04",
+2026-11-10T10:41:20.0563802Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0564839Z     },
+2026-11-10T10:41:20.0565625Z     {
+2026-11-10T10:41:20.0566474Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0567623Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0568672Z      "check_error": null,
+2026-11-10T10:41:20.0569632Z      "id": "R05",
+2026-11-10T10:41:20.0570561Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0571584Z     },
+2026-11-10T10:41:20.0572466Z     {
+2026-11-10T10:41:20.0573321Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0574447Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0575498Z      "check_error": null,
+2026-11-10T10:41:20.0576452Z      "id": "R06",
+2026-11-10T10:41:20.0577372Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0578403Z     },
+2026-11-10T10:41:20.0579175Z     {
+2026-11-10T10:41:20.0580013Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0581146Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0582289Z      "check_error": null,
+2026-11-10T10:41:20.0583238Z      "id": "R07",
+2026-11-10T10:41:20.0584138Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0585156Z     },
+2026-11-10T10:41:20.0585917Z     {
+2026-11-10T10:41:20.0586766Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0587874Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0588907Z      "check_error": null,
+2026-11-10T10:41:20.0589850Z      "id": "R08",
+2026-11-10T10:41:20.0590762Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0591776Z     },
+2026-11-10T10:41:20.0592656Z     {
+2026-11-10T10:41:20.0593494Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0594608Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0595641Z      "check_error": null,
+2026-11-10T10:41:20.0596590Z      "id": "R09",
+2026-11-10T10:41:20.0597493Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0598505Z     },
+2026-11-10T10:41:20.0599270Z     {
+2026-11-10T10:41:20.0600109Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0601227Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0602379Z      "check_error": null,
+2026-11-10T10:41:20.0603327Z      "id": "R10",
+2026-11-10T10:41:20.0604242Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0605253Z     },
+2026-11-10T10:41:20.0606452Z     {
+2026-11-10T10:41:20.0607595Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0608737Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0609772Z      "check_error": null,
+2026-11-10T10:41:20.0610715Z      "id": "R11",
+2026-11-10T10:41:20.0611616Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0612936Z     },
+2026-11-10T10:41:20.0613705Z     {
+2026-11-10T10:41:20.0614555Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0615705Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0616733Z      "check_error": null,
+2026-11-10T10:41:20.0617684Z      "id": "R12",
+2026-11-10T10:41:20.0618585Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0619598Z     },
+2026-11-10T10:41:20.0620350Z     {
+2026-11-10T10:41:20.0621187Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0622441Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0623481Z      "check_error": null,
+2026-11-10T10:41:20.0624607Z      "id": "R13",
+2026-11-10T10:41:20.0625515Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0626545Z     },
+2026-11-10T10:41:20.0627307Z     {
+2026-11-10T10:41:20.0628136Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0629253Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0630278Z      "check_error": null,
+2026-11-10T10:41:20.0631219Z      "id": "R14",
+2026-11-10T10:41:20.0632284Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0633313Z     },
+2026-11-10T10:41:20.0634082Z     {
+2026-11-10T10:41:20.0634929Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0636035Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0637069Z      "check_error": null,
+2026-11-10T10:41:20.0638013Z      "id": "R15",
+2026-11-10T10:41:20.0638916Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0639936Z     },
+2026-11-10T10:41:20.0640692Z     {
+2026-11-10T10:41:20.0641537Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0642788Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0643843Z      "check_error": null,
+2026-11-10T10:41:20.0644796Z      "id": "R16",
+2026-11-10T10:41:20.0645724Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0646745Z     },
+2026-11-10T10:41:20.0647520Z     {
+2026-11-10T10:41:20.0648371Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0649493Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0650536Z      "check_error": null,
+2026-11-10T10:41:20.0651488Z      "id": "R17",
+2026-11-10T10:41:20.0652529Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0653546Z     },
+2026-11-10T10:41:20.0654315Z     {
+2026-11-10T10:41:20.0655167Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0656289Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0657336Z      "check_error": null,
+2026-11-10T10:41:20.0658283Z      "id": "R18",
+2026-11-10T10:41:20.0659205Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0660218Z     },
+2026-11-10T10:41:20.0660981Z     {
+2026-11-10T10:41:20.0661843Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0663101Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0664139Z      "check_error": null,
+2026-11-10T10:41:20.0665099Z      "id": "R19",
+2026-11-10T10:41:20.0666021Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0667034Z     },
+2026-11-10T10:41:20.0667799Z     {
+2026-11-10T10:41:20.0668646Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0669757Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0670781Z      "check_error": null,
+2026-11-10T10:41:20.0671729Z      "id": "R20",
+2026-11-10T10:41:20.0672765Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0673778Z     },
+2026-11-10T10:41:20.0674543Z     {
+2026-11-10T10:41:20.0675380Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0676476Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0677640Z      "check_error": null,
+2026-11-10T10:41:20.0678606Z      "id": "R21",
+2026-11-10T10:41:20.0679515Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0680513Z     },
+2026-11-10T10:41:20.0681285Z     {
+2026-11-10T10:41:20.0682266Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0683377Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0684568Z      "check_error": null,
+2026-11-10T10:41:20.0685523Z      "id": "R22",
+2026-11-10T10:41:20.0686521Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0687697Z     },
+2026-11-10T10:41:20.0688471Z     {
+2026-11-10T10:41:20.0689319Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0690423Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0691459Z      "check_error": null,
+2026-11-10T10:41:20.0692658Z      "id": "R23",
+2026-11-10T10:41:20.0693580Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0694585Z     },
+2026-11-10T10:41:20.0695358Z     {
+2026-11-10T10:41:20.0696203Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0697309Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0698628Z      "check_error": null,
+2026-11-10T10:41:20.0699588Z      "id": "R24",
+2026-11-10T10:41:20.0700489Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0701681Z     },
+2026-11-10T10:41:20.0702701Z     {
+2026-11-10T10:41:20.0703555Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0704681Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0705719Z      "check_error": null,
+2026-11-10T10:41:20.0706688Z      "id": "R25",
+2026-11-10T10:41:20.0707607Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0708617Z     },
+2026-11-10T10:41:20.0709384Z     {
+2026-11-10T10:41:20.0710225Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0711340Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0712497Z      "check_error": null,
+2026-11-10T10:41:20.0713443Z      "id": "R26",
+2026-11-10T10:41:20.0714361Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0715370Z     },
+2026-11-10T10:41:20.0716181Z     {
+2026-11-10T10:41:20.0717046Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0718161Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0719184Z      "check_error": null,
+2026-11-10T10:41:20.0720129Z      "id": "R27",
+2026-11-10T10:41:20.0721040Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0722061Z     },
+2026-11-10T10:41:20.0722950Z     {
+2026-11-10T10:41:20.0723810Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0724922Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0725948Z      "check_error": null,
+2026-11-10T10:41:20.0726898Z      "id": "R28",
+2026-11-10T10:41:20.0727801Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0728810Z     },
+2026-11-10T10:41:20.0729579Z     {
+2026-11-10T10:41:20.0730427Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0731535Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0732965Z      "check_error": null,
+2026-11-10T10:41:20.0733915Z      "id": "R29",
+2026-11-10T10:41:20.0734818Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0735824Z     },
+2026-11-10T10:41:20.0736590Z     {
+2026-11-10T10:41:20.0737443Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0738544Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0739587Z      "check_error": null,
+2026-11-10T10:41:20.0740550Z      "id": "R30",
+2026-11-10T10:41:20.0741462Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0742646Z     },
+2026-11-10T10:41:20.0743422Z     {
+2026-11-10T10:41:20.0744260Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0745374Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0746407Z      "check_error": null,
+2026-11-10T10:41:20.0747350Z      "id": "R31",
+2026-11-10T10:41:20.0748264Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0749268Z     },
+2026-11-10T10:41:20.0750043Z     {
+2026-11-10T10:41:20.0750887Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0751991Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0753150Z      "check_error": null,
+2026-11-10T10:41:20.0754085Z      "id": "R32",
+2026-11-10T10:41:20.0755002Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0756001Z     },
+2026-11-10T10:41:20.0756763Z     {
+2026-11-10T10:41:20.0757603Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0758696Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0759731Z      "check_error": null,
+2026-11-10T10:41:20.0760672Z      "id": "R33",
+2026-11-10T10:41:20.0761736Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0762882Z     },
+2026-11-10T10:41:20.0763648Z     {
+2026-11-10T10:41:20.0764491Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0765599Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0766623Z      "check_error": null,
+2026-11-10T10:41:20.0767551Z      "id": "R34",
+2026-11-10T10:41:20.0768459Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0769461Z     },
+2026-11-10T10:41:20.0770226Z     {
+2026-11-10T10:41:20.0771579Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0773032Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0774077Z      "check_error": null,
+2026-11-10T10:41:20.0775103Z      "id": "R35",
+2026-11-10T10:41:20.0776078Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0777169Z     },
+2026-11-10T10:41:20.0778021Z     {
+2026-11-10T10:41:20.0778886Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0780175Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0781209Z      "check_error": null,
+2026-11-10T10:41:20.0782304Z      "id": "R36",
+2026-11-10T10:41:20.0783228Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0784234Z     },
+2026-11-10T10:41:20.0785001Z     {
+2026-11-10T10:41:20.0785852Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0786954Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0787983Z      "check_error": null,
+2026-11-10T10:41:20.0788919Z      "id": "R37",
+2026-11-10T10:41:20.0789821Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0790813Z     },
+2026-11-10T10:41:20.0791580Z     {
+2026-11-10T10:41:20.0792614Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0793753Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0794775Z      "check_error": null,
+2026-11-10T10:41:20.0795704Z      "id": "R38",
+2026-11-10T10:41:20.0796609Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0797610Z     },
+2026-11-10T10:41:20.0798375Z     {
+2026-11-10T10:41:20.0799213Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0800332Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0801364Z      "check_error": null,
+2026-11-10T10:41:20.0802455Z      "id": "R39",
+2026-11-10T10:41:20.0803369Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0804366Z     },
+2026-11-10T10:41:20.0805123Z     {
+2026-11-10T10:41:20.0805963Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0807078Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0808096Z      "check_error": null,
+2026-11-10T10:41:20.0809032Z      "id": "R40",
+2026-11-10T10:41:20.0809934Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0810934Z     },
+2026-11-10T10:41:20.0811698Z     {
+2026-11-10T10:41:20.0812666Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0813764Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0814785Z      "check_error": null,
+2026-11-10T10:41:20.0815755Z      "id": "R41",
+2026-11-10T10:41:20.0816662Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0817662Z     },
+2026-11-10T10:41:20.0818440Z     {
+2026-11-10T10:41:20.0819285Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0820396Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0821426Z      "check_error": null,
+2026-11-10T10:41:20.0822476Z      "id": "R42",
+2026-11-10T10:41:20.0823386Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0824387Z     },
+2026-11-10T10:41:20.0825147Z     {
+2026-11-10T10:41:20.0825997Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0827104Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0828129Z      "check_error": null,
+2026-11-10T10:41:20.0829064Z      "id": "R43",
+2026-11-10T10:41:20.0829972Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0830975Z     },
+2026-11-10T10:41:20.0831737Z     {
+2026-11-10T10:41:20.0832700Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0833822Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0834848Z      "check_error": null,
+2026-11-10T10:41:20.0835787Z      "id": "R44",
+2026-11-10T10:41:20.0836685Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0837687Z     },
+2026-11-10T10:41:20.0838452Z     {
+2026-11-10T10:41:20.0839474Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0840590Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0841606Z      "check_error": null,
+2026-11-10T10:41:20.0842676Z      "id": "R45",
+2026-11-10T10:41:20.0843574Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0844711Z     },
+2026-11-10T10:41:20.0845475Z     {
+2026-11-10T10:41:20.0846323Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0847426Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0848449Z      "check_error": null,
+2026-11-10T10:41:20.0849383Z      "id": "R46",
+2026-11-10T10:41:20.0850289Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0851275Z     },
+2026-11-10T10:41:20.0852034Z     {
+2026-11-10T10:41:20.0853047Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0854149Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0855155Z      "check_error": null,
+2026-11-10T10:41:20.0856085Z      "id": "R47",
+2026-11-10T10:41:20.0857154Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0858161Z     },
+2026-11-10T10:41:20.0859176Z     {
+2026-11-10T10:41:20.0860044Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0861156Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0862413Z      "check_error": null,
+2026-11-10T10:41:20.0863386Z      "id": "R48",
+2026-11-10T10:41:20.0864303Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0865311Z     },
+2026-11-10T10:41:20.0866073Z     {
+2026-11-10T10:41:20.0866924Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0868023Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0869052Z      "check_error": null,
+2026-11-10T10:41:20.0870453Z      "id": "P01",
+2026-11-10T10:41:20.0871951Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0873928Z     },
+2026-11-10T10:41:20.0875195Z     {
+2026-11-10T10:41:20.0876579Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0878376Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0880051Z      "check_error": null,
+2026-11-10T10:41:20.0881599Z      "id": "P02",
+2026-11-10T10:41:20.0883246Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0884787Z     },
+2026-11-10T10:41:20.0885982Z     {
+2026-11-10T10:41:20.0887309Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0889053Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0890728Z      "check_error": null,
+2026-11-10T10:41:20.0892436Z      "id": "P03",
+2026-11-10T10:41:20.0893920Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0895518Z     },
+2026-11-10T10:41:20.0896736Z     {
+2026-11-10T10:41:20.0897745Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0898866Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0899901Z      "check_error": null,
+2026-11-10T10:41:20.0900847Z      "id": "P04",
+2026-11-10T10:41:20.0901753Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0903090Z     },
+2026-11-10T10:41:20.0903872Z     {
+2026-11-10T10:41:20.0904715Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0905808Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0906854Z      "check_error": null,
+2026-11-10T10:41:20.0907790Z      "id": "P05",
+2026-11-10T10:41:20.0908704Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0909693Z     },
+2026-11-10T10:41:20.0910452Z     {
+2026-11-10T10:41:20.0911295Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0912551Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0913573Z      "check_error": null,
+2026-11-10T10:41:20.0914509Z      "id": "P06",
+2026-11-10T10:41:20.0915449Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0916433Z     },
+2026-11-10T10:41:20.0917174Z     {
+2026-11-10T10:41:20.0918001Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0919094Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0920098Z      "check_error": null,
+2026-11-10T10:41:20.0921019Z      "id": "P07",
+2026-11-10T10:41:20.0921915Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0923033Z     },
+2026-11-10T10:41:20.0923775Z     {
+2026-11-10T10:41:20.0924608Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0925692Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0926697Z      "check_error": null,
+2026-11-10T10:41:20.0927844Z      "id": "P08",
+2026-11-10T10:41:20.0928756Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0929747Z     },
+2026-11-10T10:41:20.0930497Z     {
+2026-11-10T10:41:20.0931322Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0932539Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0933551Z      "check_error": null,
+2026-11-10T10:41:20.0934465Z      "id": "P09",
+2026-11-10T10:41:20.0935360Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0936343Z     },
+2026-11-10T10:41:20.0937084Z     {
+2026-11-10T10:41:20.0937910Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0938994Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0940000Z      "check_error": null,
+2026-11-10T10:41:20.0940932Z      "id": "P10",
+2026-11-10T10:41:20.0941828Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0942927Z     },
+2026-11-10T10:41:20.0943678Z     {
+2026-11-10T10:41:20.0944658Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0945734Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0946780Z      "check_error": null,
+2026-11-10T10:41:20.0947708Z      "id": "P11",
+2026-11-10T10:41:20.0948604Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0949583Z     },
+2026-11-10T10:41:20.0950335Z     {
+2026-11-10T10:41:20.0951174Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0952413Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0953440Z      "check_error": null,
+2026-11-10T10:41:20.0954368Z      "id": "P12",
+2026-11-10T10:41:20.0955266Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0956259Z     },
+2026-11-10T10:41:20.0957005Z     {
+2026-11-10T10:41:20.0957844Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0958925Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0959928Z      "check_error": null,
+2026-11-10T10:41:20.0960850Z      "id": "P13",
+2026-11-10T10:41:20.0961739Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0962864Z     },
+2026-11-10T10:41:20.0963611Z     {
+2026-11-10T10:41:20.0964433Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0965529Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0966536Z      "check_error": null,
+2026-11-10T10:41:20.0967453Z      "id": "P14",
+2026-11-10T10:41:20.0968352Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0969335Z     },
+2026-11-10T10:41:20.0970079Z     {
+2026-11-10T10:41:20.0970916Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0972000Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0973130Z      "check_error": null,
+2026-11-10T10:41:20.0974050Z      "id": "P15",
+2026-11-10T10:41:20.0974941Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0975914Z     },
+2026-11-10T10:41:20.0976659Z     {
+2026-11-10T10:41:20.0977489Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0978563Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0979578Z      "check_error": null,
+2026-11-10T10:41:20.0980499Z      "id": "P16",
+2026-11-10T10:41:20.0981399Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0982497Z     },
+2026-11-10T10:41:20.0983246Z     {
+2026-11-10T10:41:20.0984084Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0985160Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0986171Z      "check_error": null,
+2026-11-10T10:41:20.0987097Z      "id": "P17",
+2026-11-10T10:41:20.0987990Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0988987Z     },
+2026-11-10T10:41:20.0989739Z     {
+2026-11-10T10:41:20.0990571Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0991658Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0992791Z      "check_error": null,
+2026-11-10T10:41:20.0993710Z      "id": "P18",
+2026-11-10T10:41:20.0994604Z      "ref_equals_expected": true
+2026-11-10T10:41:20.0995590Z     },
+2026-11-10T10:41:20.0996329Z     {
+2026-11-10T10:41:20.0997155Z      "check_equals_expected": true,
+2026-11-10T10:41:20.0998231Z      "check_equals_ref": true,
+2026-11-10T10:41:20.0999235Z      "check_error": null,
+2026-11-10T10:41:20.1000173Z      "id": "P19",
+2026-11-10T10:41:20.1001058Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1002041Z     },
+2026-11-10T10:41:20.1003216Z     {
+2026-11-10T10:41:20.1004053Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1005136Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1006137Z      "check_error": null,
+2026-11-10T10:41:20.1007062Z      "id": "P20",
+2026-11-10T10:41:20.1007955Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1008929Z     },
+2026-11-10T10:41:20.1009671Z     {
+2026-11-10T10:41:20.1010507Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1011763Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1012900Z      "check_error": null,
+2026-11-10T10:41:20.1013818Z      "id": "P21",
+2026-11-10T10:41:20.1014800Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1016009Z     },
+2026-11-10T10:41:20.1016983Z     {
+2026-11-10T10:41:20.1017830Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1018910Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1020165Z      "check_error": null,
+2026-11-10T10:41:20.1021185Z      "id": "P22",
+2026-11-10T10:41:20.1022374Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1023552Z     },
+2026-11-10T10:41:20.1024322Z     {
+2026-11-10T10:41:20.1025154Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1026267Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1027323Z      "check_error": null,
+2026-11-10T10:41:20.1028240Z      "id": "P23",
+2026-11-10T10:41:20.1029121Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1030090Z     },
+2026-11-10T10:41:20.1030827Z     {
+2026-11-10T10:41:20.1031649Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1032909Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1033905Z      "check_error": null,
+2026-11-10T10:41:20.1034815Z      "id": "P24",
+2026-11-10T10:41:20.1035695Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1036670Z     },
+2026-11-10T10:41:20.1037411Z     {
+2026-11-10T10:41:20.1038230Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1039316Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1040315Z      "check_error": null,
+2026-11-10T10:41:20.1041242Z      "id": "P25",
+2026-11-10T10:41:20.1042265Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1043240Z     }
+2026-11-10T10:41:20.1043974Z    ]
+2026-11-10T10:41:20.1044695Z   },
+2026-11-10T10:41:20.1045499Z   "WEXP-CORE-02-VECTORS-002": {
+2026-11-10T10:41:20.1046477Z    "cases": 35,
+2026-11-10T10:41:20.1047351Z    "check_equals_expected": 35,
+2026-11-10T10:41:20.1048358Z    "check_equals_ref": 35,
+2026-11-10T10:41:20.1049895Z    "corpus_sha256": "9e301333bfdaa4a96068fe44adc0cde3f8eb63bc08f77f164d1d568f609a8bc0",
+2026-11-10T10:41:20.1051550Z    "rows": [
+2026-11-10T10:41:20.1052469Z     {
+2026-11-10T10:41:20.1053299Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1054372Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1055375Z      "check_error": null,
+2026-11-10T10:41:20.1056296Z      "id": "B01",
+2026-11-10T10:41:20.1057182Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1058159Z     },
+2026-11-10T10:41:20.1058910Z     {
+2026-11-10T10:41:20.1059720Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1060787Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1061774Z      "check_error": null,
+2026-11-10T10:41:20.1062870Z      "id": "B02",
+2026-11-10T10:41:20.1063750Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1064719Z     },
+2026-11-10T10:41:20.1065459Z     {
+2026-11-10T10:41:20.1066276Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1067345Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1068361Z      "check_error": null,
+2026-11-10T10:41:20.1069276Z      "id": "B03",
+2026-11-10T10:41:20.1070147Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1071116Z     },
+2026-11-10T10:41:20.1071854Z     {
+2026-11-10T10:41:20.1072889Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1073956Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1074948Z      "check_error": null,
+2026-11-10T10:41:20.1075860Z      "id": "B04",
+2026-11-10T10:41:20.1076749Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1077719Z     },
+2026-11-10T10:41:20.1078447Z     {
+2026-11-10T10:41:20.1079531Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1080610Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1081593Z      "check_error": null,
+2026-11-10T10:41:20.1082644Z      "id": "B05",
+2026-11-10T10:41:20.1083518Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1084484Z     },
+2026-11-10T10:41:20.1085221Z     {
+2026-11-10T10:41:20.1086026Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1087096Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1088089Z      "check_error": null,
+2026-11-10T10:41:20.1088992Z      "id": "B06",
+2026-11-10T10:41:20.1089868Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1090845Z     },
+2026-11-10T10:41:20.1091587Z     {
+2026-11-10T10:41:20.1092565Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1093629Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1094614Z      "check_error": null,
+2026-11-10T10:41:20.1095718Z      "id": "B07",
+2026-11-10T10:41:20.1096591Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1097571Z     },
+2026-11-10T10:41:20.1098316Z     {
+2026-11-10T10:41:20.1099135Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1100206Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1101210Z      "check_error": null,
+2026-11-10T10:41:20.1102268Z      "id": "B08",
+2026-11-10T10:41:20.1121313Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1122886Z     },
+2026-11-10T10:41:20.1123651Z     {
+2026-11-10T10:41:20.1124477Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1125567Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1126565Z      "check_error": null,
+2026-11-10T10:41:20.1127479Z      "id": "B09",
+2026-11-10T10:41:20.1128365Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1129353Z     },
+2026-11-10T10:41:20.1130088Z     {
+2026-11-10T10:41:20.1130904Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1131980Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1133226Z      "check_error": null,
+2026-11-10T10:41:20.1134150Z      "id": "B10",
+2026-11-10T10:41:20.1135056Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1136033Z     },
+2026-11-10T10:41:20.1136770Z     {
+2026-11-10T10:41:20.1137579Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1138646Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1139640Z      "check_error": null,
+2026-11-10T10:41:20.1140551Z      "id": "B11",
+2026-11-10T10:41:20.1141440Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1142541Z     },
+2026-11-10T10:41:20.1143289Z     {
+2026-11-10T10:41:20.1144107Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1145184Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1146172Z      "check_error": null,
+2026-11-10T10:41:20.1147077Z      "id": "B12",
+2026-11-10T10:41:20.1147960Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1148940Z     },
+2026-11-10T10:41:20.1149684Z     {
+2026-11-10T10:41:20.1150496Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1151580Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1152777Z      "check_error": null,
+2026-11-10T10:41:20.1153735Z      "id": "B13",
+2026-11-10T10:41:20.1154608Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1155571Z     },
+2026-11-10T10:41:20.1156301Z     {
+2026-11-10T10:41:20.1157114Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1158168Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1159160Z      "check_error": null,
+2026-11-10T10:41:20.1160069Z      "id": "B14",
+2026-11-10T10:41:20.1160944Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1162375Z     },
+2026-11-10T10:41:20.1163325Z     {
+2026-11-10T10:41:20.1164156Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1165238Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1166236Z      "check_error": null,
+2026-11-10T10:41:20.1167153Z      "id": "B15",
+2026-11-10T10:41:20.1168030Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1169007Z     },
+2026-11-10T10:41:20.1169750Z     {
+2026-11-10T10:41:20.1170574Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1171636Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1173208Z      "check_error": null,
+2026-11-10T10:41:20.1174137Z      "id": "B16",
+2026-11-10T10:41:20.1175019Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1175993Z     },
+2026-11-10T10:41:20.1176733Z     {
+2026-11-10T10:41:20.1177695Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1178764Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1179871Z      "check_error": null,
+2026-11-10T10:41:20.1180787Z      "id": "B17",
+2026-11-10T10:41:20.1181666Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1182880Z     },
+2026-11-10T10:41:20.1183695Z     {
+2026-11-10T10:41:20.1184712Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1185809Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1186806Z      "check_error": null,
+2026-11-10T10:41:20.1187713Z      "id": "B18",
+2026-11-10T10:41:20.1188590Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1189565Z     },
+2026-11-10T10:41:20.1190553Z     {
+2026-11-10T10:41:20.1191372Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1192734Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1193741Z      "check_error": null,
+2026-11-10T10:41:20.1194642Z      "id": "B19",
+2026-11-10T10:41:20.1195514Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1196480Z     },
+2026-11-10T10:41:20.1197214Z     {
+2026-11-10T10:41:20.1198021Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1199079Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1200068Z      "check_error": null,
+2026-11-10T10:41:20.1200970Z      "id": "B20",
+2026-11-10T10:41:20.1201846Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1202992Z     },
+2026-11-10T10:41:20.1203738Z     {
+2026-11-10T10:41:20.1204552Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1205622Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1206607Z      "check_error": null,
+2026-11-10T10:41:20.1207514Z      "id": "B21",
+2026-11-10T10:41:20.1208381Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1209356Z     },
+2026-11-10T10:41:20.1210097Z     {
+2026-11-10T10:41:20.1210910Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1211982Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1213103Z      "check_error": null,
+2026-11-10T10:41:20.1214019Z      "id": "B22",
+2026-11-10T10:41:20.1214888Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1215893Z     },
+2026-11-10T10:41:20.1216633Z     {
+2026-11-10T10:41:20.1217445Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1218509Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1219497Z      "check_error": null,
+2026-11-10T10:41:20.1220400Z      "id": "B23",
+2026-11-10T10:41:20.1221269Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1222356Z     },
+2026-11-10T10:41:20.1223107Z     {
+2026-11-10T10:41:20.1223920Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1224983Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1225959Z      "check_error": null,
+2026-11-10T10:41:20.1226844Z      "id": "B24",
+2026-11-10T10:41:20.1227727Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1228692Z     },
+2026-11-10T10:41:20.1229431Z     {
+2026-11-10T10:41:20.1230236Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1231285Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1232386Z      "check_error": null,
+2026-11-10T10:41:20.1233293Z      "id": "B25",
+2026-11-10T10:41:20.1234162Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1235124Z     },
+2026-11-10T10:41:20.1235854Z     {
+2026-11-10T10:41:20.1236655Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1237712Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1238697Z      "check_error": null,
+2026-11-10T10:41:20.1239602Z      "id": "B26",
+2026-11-10T10:41:20.1240469Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1241433Z     },
+2026-11-10T10:41:20.1242284Z     {
+2026-11-10T10:41:20.1243107Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1244165Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1245156Z      "check_error": null,
+2026-11-10T10:41:20.1246060Z      "id": "B27",
+2026-11-10T10:41:20.1247163Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1248146Z     },
+2026-11-10T10:41:20.1248878Z     {
+2026-11-10T10:41:20.1249690Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1250751Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1251730Z      "check_error": null,
+2026-11-10T10:41:20.1252754Z      "id": "B28",
+2026-11-10T10:41:20.1253629Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1254590Z     },
+2026-11-10T10:41:20.1255325Z     {
+2026-11-10T10:41:20.1256138Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1257187Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1258153Z      "check_error": null,
+2026-11-10T10:41:20.1259050Z      "id": "B29",
+2026-11-10T10:41:20.1259913Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1260871Z     },
+2026-11-10T10:41:20.1261611Z     {
+2026-11-10T10:41:20.1262573Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1263631Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1264763Z      "check_error": null,
+2026-11-10T10:41:20.1265662Z      "id": "B30",
+2026-11-10T10:41:20.1266541Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1267532Z     },
+2026-11-10T10:41:20.1268271Z     {
+2026-11-10T10:41:20.1269081Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1270139Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1271121Z      "check_error": null,
+2026-11-10T10:41:20.1272025Z      "id": "B31",
+2026-11-10T10:41:20.1273041Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1274008Z     },
+2026-11-10T10:41:20.1274747Z     {
+2026-11-10T10:41:20.1275554Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1276619Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1277604Z      "check_error": null,
+2026-11-10T10:41:20.1278495Z      "id": "B32",
+2026-11-10T10:41:20.1279362Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1280327Z     },
+2026-11-10T10:41:20.1281062Z     {
+2026-11-10T10:41:20.1281870Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1283054Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1284044Z      "check_error": null,
+2026-11-10T10:41:20.1284947Z      "id": "B33",
+2026-11-10T10:41:20.1285822Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1286790Z     },
+2026-11-10T10:41:20.1287528Z     {
+2026-11-10T10:41:20.1288333Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1289383Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1290365Z      "check_error": null,
+2026-11-10T10:41:20.1291264Z      "id": "B34",
+2026-11-10T10:41:20.1292254Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1293221Z     },
+2026-11-10T10:41:20.1293952Z     {
+2026-11-10T10:41:20.1294760Z      "check_equals_expected": true,
+2026-11-10T10:41:20.1295806Z      "check_equals_ref": true,
+2026-11-10T10:41:20.1296785Z      "check_error": null,
+2026-11-10T10:41:20.1297693Z      "id": "B35",
+2026-11-10T10:41:20.1298557Z      "ref_equals_expected": true
+2026-11-10T10:41:20.1299515Z     }
+2026-11-10T10:41:20.1300263Z    ]
+2026-11-10T10:41:20.1300983Z   }
+2026-11-10T10:41:20.1301699Z  }
+2026-11-10T10:41:20.1302533Z }
+2026-11-10T10:41:20.1489973Z Post job cleanup.
+2026-11-10T10:41:20.2745437Z (node:2283) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-10T10:41:20.2749233Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-10T10:41:20.2900088Z Cleaning up orphan processes
+2026-11-10T10:41:20.3443022Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

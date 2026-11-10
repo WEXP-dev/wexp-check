@@ -48,3 +48,5 @@ To appraise one input by hand:
 ```sh
 python3 -B -m wexp_check --input <normalized-input.json> --profiles <profiles.json>
 ```
+
+An external run of these commands by Laurent Lemonnier (2026-11-10) is recorded in [`reproductions/2026-11-10-lemonnier/`](reproductions/2026-11-10-lemonnier/README.md).
