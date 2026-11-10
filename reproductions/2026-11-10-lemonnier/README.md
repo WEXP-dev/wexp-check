@@ -4,7 +4,7 @@ Laurent Lemonnier ran the unit tests and the corpus comparison of this repositor
 his own repository, `Laurent-Lemonnier/dps-scitt-decision-layer`
 (workflow `.github/workflows/wexp-reproduce.yml`, run
 [42801386609](https://github.com/Laurent-Lemonnier/dps-scitt-decision-layer/actions/runs/42801386609),
-attempt 1, head `f661d39f7d9191f536ea09b7f7c4bbcc70af6128`), and asked that the result be recorded under
+attempt 1, head `f661d39f7d9191f536ea09b7f7c4bbcc70af6128`), and agreed to the result being recorded under
 his name. The commands of the tests and of the comparison from the pinned instructions were run in
 GitHub Actions; details of environment preparation are reflected in the saved workflow file.
 
