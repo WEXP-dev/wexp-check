@@ -92,3 +92,24 @@ from or added to the `--baseline` comparison file, when an engine raises or muta
 when a `corpus.json` differs from the case count or digest of the `manifest.json` beside it. The
 per-case output of a passing run is unchanged (identical to `comparison.json`). No file of
 `wexp_check/` and no expectation changed.
+
+## Note on wording (added after the runs)
+
+The sections above keep their wording as of the time of the runs; three phrases in them
+("independent re-derivation", the implementation not having seen the corpus expectations, and
+"independent review" in the run 3 heading), and "isolated implementation session" in
+`FREEZE.md`, which is not changed, are qualified here.
+
+wexp_check was written in a separate AI-assisted session operated by the same person as wexp-ref.
+That the session did not consult wexp-ref or any WEXP corpus expectations is an operator
+declaration and has not been independently verified; the wexp-ref Core-02 module was public before
+wexp_check started. Its initial version was frozen before the first recorded corpus comparison
+(`FREEZE.md`, `b28d00af`); later changes are documented in this file.
+
+A separate session, operated by the same person, re-derived the 89 set 001 expected results in
+`WEXP-dev/wexp-vectors`; that it consulted neither appraiser is an operator declaration and has
+not been independently verified.
+
+The original comparison runs were performed under the same operator and do not establish
+independent implementation provenance. The reviewer of commit `7b5ab8e` is not named here, and
+this record does not establish that the review was independent.

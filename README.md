@@ -1,11 +1,17 @@
-# wexp_check
+# wexp-check
 
 `wexp_check` is an implementation of the normalized-input appraisal procedure of the published
-Internet-Draft `draft-sergeev-wexp-core-02` (WEXP Core, semantics version `wexp-core-2`),
-written from the published text; the author did not read wexp-ref or any WEXP corpus expectations.
-Besides the text, the author received only a short task brief, the representation note now kept as
+Internet-Draft [`draft-sergeev-wexp-core-02`](https://datatracker.ietf.org/doc/draft-sergeev-wexp-core/02/)
+(WEXP Core, semantics version `wexp-core-2`). wexp-check was written in a separate AI-assisted
+session operated by the same person as wexp-ref. That the session did not consult wexp-ref or any
+WEXP corpus expectations is an operator declaration and has not been independently verified; the
+wexp-ref Core-02 module was public before wexp-check started. Its initial version was frozen before
+the first recorded corpus comparison ([`FREEZE.md`](FREEZE.md)); later changes are documented in
+[`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md). Besides the published text, the implementation
+session was given a short task brief, the representation note now kept as
 `docs/REPRESENTATION.md`, the section 13 fixture profile catalog and one input (C01) without its
-expected result; `FILES-READ.txt` lists every file opened.
+expected result; `FILES-READ.txt` is the session's own list of the files it opened, which also
+names a README style template and the Apache-2.0 license text.
 The specification, not this code or its output, is authoritative: where the two disagree, the
 text wins and the code is wrong. WEXP appraises how far normalized findings support an exact
 execution-related claim (observation, intent, invocation or execution, with the PROV and IV
@@ -95,25 +101,41 @@ branch commit `e676fcbb` (on that repository's main branch since 2026-11-08, mer
 Every result was compared component by component, over all twenty members and with set
 semantics for the collections the harness defines as sets, both with the frozen expected
 results and with the output of `wexp_ref.core02` at `WEXP-dev/wexp-ref` commit `56289024`.
+The original comparison runs (runs 1 to 5 in `RUN-RECORD.json`) were performed under the same
+operator and do not establish independent implementation provenance.
 
 | run | code | set 001: equal to expected / to wexp-ref | set 002: equal to expected / to wexp-ref |
 |---|---|---|---|
-| 1 | as frozen | 87 / 87 of 89 | 35 / 35 of 35 |
-| 2 | after two reading alignments | 89 / 89 of 89 | 35 / 35 of 35 |
+| 1 | as frozen (`b28d00af`) | 87 / 87 of 89 | 35 / 35 of 35 |
+| 2 | after two reading alignments (`7b5ab8e0`) | 89 / 89 of 89 | 35 / 35 of 35 |
+| 3 | after two review changes (`25ec856e`); `wexp_check/` unchanged since | 89 / 89 of 89 | 35 / 35 of 35 |
+
+Runs 4 and 5 in `RUN-RECORD.json` are controls of the comparison driver; no `wexp_check` code
+changed. [`REPRODUCE.md`](REPRODUCE.md) gives the commands at the pinned revisions (wexp-ref
+`56289024`, wexp-vectors `edd67056`). On 2026-11-10 Laurent Lemonnier ran the unit tests and the
+corpus comparison in GitHub Actions in his own repository at wexp-check `a2fd1ffd`, with the same
+result: 89 / 89 and 35 / 35 against both the expectations and wexp-ref (124 / 124). This is a
+real repetition of the comparison by a third-party operator, on pinned revisions of the code and
+of the inputs; it runs this repository's code against the public expectations and is not an
+independent implementation. The record and its limitations are in
+[`reproductions/2026-11-10-lemonnier/`](reproductions/2026-11-10-lemonnier/README.md).
 
 The two run-1 differences, P08 and P18, are both places where the published text admits two
-readings and this implementation, written without seeing any corpus, took the reading the
+readings and the initial version, frozen before the first corpus comparison, took the reading the
 corpus did not. Neither is a defect of wexp-ref and neither is an error in a frozen
-expectation; an earlier independent re-derivation of the 89 expectations (`WEXP-dev/wexp-vectors`,
-branch `evidence/core-02-set-001-rederivation`, commit `a936c891`, directory
-`evidence/core-02-set-001-rederivation/`, on main since 2026-11-08, merge commit `edd67056`) had already recorded exactly these two
-questions as open. [`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md) holds the
+expectation. A separate session, operated by the same person, re-derived the 89 set 001 expected
+results; that it consulted neither appraiser is an operator declaration and has not been
+independently verified. That re-derivation (`WEXP-dev/wexp-vectors`, branch
+`evidence/core-02-set-001-rederivation`, commit `a936c891`, directory
+`evidence/core-02-set-001-rederivation/`, on main since 2026-11-08, merge commit `edd67056`) had
+already recorded exactly these two questions as open. [`CHANGES-AFTER-RUN.md`](CHANGES-AFTER-RUN.md) holds the
 classification, the two readings with the text they rest on, and the exact change made.
 [`RUN-RECORD.json`](RUN-RECORD.json) identifies the frozen commit, the code digests after the
-change, the runner and corpora compared against, and both runs;
+changes, the runner and corpora compared against, and all five runs;
 [`comparison-before-alignment.json`](comparison-before-alignment.json) and
-[`comparison.json`](comparison.json) are the per-case results of runs 1 and 2.
+[`comparison.json`](comparison.json) are the per-case results of run 1 and of runs 2 and 3
+(identical per case).
 
 Agreement with a corpus and with another implementation is what it says and nothing more:
-the specification remains the authority, the corpora are same-project work, and this record
-is not a statement about the correctness or completeness of any implementation.
+the specification remains the authority, the corpora and wexp-ref are same-project work, and
+this record is not a statement about the correctness or completeness of any implementation.

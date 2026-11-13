@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "wexp-check"
 version = "0.1.0"
-description = "Independent appraiser for draft-sergeev-wexp-core-02 (semantics wexp-core-2), written from the published text"
+description = "Second appraiser for draft-sergeev-wexp-core-02 (semantics wexp-core-2)"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "Apache-2.0"
