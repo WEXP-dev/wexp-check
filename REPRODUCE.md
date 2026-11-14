@@ -45,7 +45,11 @@ control of this behaviour is run 4 in `RUN-RECORD.json`.
 
 ## Replay it in your own repository
 
-The same comparison runs in GitHub Actions of any repository with one small file,
+**The short way, with no file to write:** fork this repository, open the Actions tab of your fork,
+allow workflows to run there, choose "Replay the corpus comparison" and press "Run workflow". The run uses the three
+pinned revisions and needs no secret.
+
+To keep the replay in a repository of your own instead, one small file is enough,
 `.github/workflows/wexp-replay.yml`:
 
 ```yaml
