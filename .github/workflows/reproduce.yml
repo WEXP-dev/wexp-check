@@ -1,0 +1,45 @@
+name: Unit tests and corpus comparison at the pinned revisions
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.12', '3.13']
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      WEXP_REF_COMMIT: 56289024c9ee748111f1f1d4f42728ffe04d8d69
+      WEXP_VECTORS_COMMIT: edd67056873502a2c3cecf5dd2b8db71271c2f57
+    steps:
+      - name: Check out the exact event commit
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Check out wexp-ref and wexp-vectors at the revisions of REPRODUCE.md
+        run: |
+          git clone https://github.com/WEXP-dev/wexp-ref.git "$RUNNER_TEMP/wexp-ref"
+          git -C "$RUNNER_TEMP/wexp-ref" checkout "$WEXP_REF_COMMIT"
+          git clone https://github.com/WEXP-dev/wexp-vectors.git "$RUNNER_TEMP/wexp-vectors"
+          git -C "$RUNNER_TEMP/wexp-vectors" checkout "$WEXP_VECTORS_COMMIT"
+      - name: Unit tests
+        run: PYTHONPATH=. python -B -m unittest discover -s tests
+      - name: Corpus comparison against the recorded baseline
+        run: |
+          python -B scripts/compare_corpora.py --baseline comparison.json . \
+            "$RUNNER_TEMP/wexp-ref" "$RUNNER_TEMP/comparison.json" \
+            "$RUNNER_TEMP/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json" \
+            "$RUNNER_TEMP/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json"
