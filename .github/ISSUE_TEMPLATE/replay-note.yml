@@ -1,0 +1,50 @@
+name: Replay note
+description: Tell us you repeated the corpus comparison, whatever the outcome.
+title: "Replay note: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thank you for repeating the comparison. A replay that differs from the
+        record is at least as useful as one that matches. Please include public
+        information only.
+  - type: input
+    id: run
+    attributes:
+      label: Link to your run
+      description: A public Actions run, or a repository holding the output. Leave empty if it was a local run.
+    validations:
+      required: false
+  - type: input
+    id: commits
+    attributes:
+      label: Revisions used
+      description: Commits of wexp-check, wexp-ref and wexp-vectors. "The defaults of the replay workflow" is a fine answer.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What you saw
+      description: The two result lines (set 001 and set 002), or the FAIL line, as printed.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system and Python version, if not visible in the linked run.
+    validations:
+      required: false
+  - type: dropdown
+    id: record
+    attributes:
+      label: May we record this replay in this repository?
+      options:
+        - "Yes, with my name"
+        - "Yes, without my name"
+        - "No, this note is enough"
+    validations:
+      required: true

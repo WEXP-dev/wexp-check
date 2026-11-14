@@ -43,6 +43,34 @@ naming the set and the case, if an expectation differs, a case is missing or add
 or mutates its input, or a `corpus.json` differs from the `manifest.json` beside it. The negative
 control of this behaviour is run 4 in `RUN-RECORD.json`.
 
+## Replay it in your own repository
+
+The same comparison runs in GitHub Actions of any repository with one small file,
+`.github/workflows/wexp-replay.yml`:
+
+```yaml
+name: Replay the wexp-check corpus comparison
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  replay:
+    uses: WEXP-dev/wexp-check/.github/workflows/replay.yml@<commit of this repository>
+```
+
+Pin the `uses:` line to a full commit id of this repository, so that what runs cannot change under
+you. The workflow needs no secret. It checks out `wexp-check`, `wexp-ref` and `wexp-vectors` at the
+revisions above (each can be overridden with `with:`), runs the unit tests and the comparison, prints
+the two result lines in the run summary and keeps `comparison.json` as an artifact of your run.
+
+If you run it, a [replay note](https://github.com/WEXP-dev/wexp-check/issues/new?template=replay-note.yml)
+is welcome whatever the outcome; a replay that differs from the record is the more useful one. The note
+asks whether the replay may be recorded under `reproductions/` and whether to name you.
+
+A replay by another operator repeats the recorded comparison with the published code on the published
+inputs. It is not an independent implementation, and it does not make the two appraisers independent
+of each other.
+
 To appraise one input by hand:
 
 ```sh
