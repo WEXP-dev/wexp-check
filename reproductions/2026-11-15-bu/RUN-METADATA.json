@@ -1,0 +1,63 @@
+{
+  "commands": {
+    "layout": "wexp-check, wexp-ref and wexp-vectors cloned side by side and checked out at the pins",
+    "setup": [
+      "git clone https://github.com/WEXP-dev/wexp-check.git",
+      "git clone https://github.com/WEXP-dev/wexp-ref.git",
+      "git clone https://github.com/WEXP-dev/wexp-vectors.git",
+      "git -C wexp-check checkout 63bde685c54fd6329f1217708d1c211b80c3712e",
+      "git -C wexp-ref checkout 56289024c9ee748111f1f1d4f42728ffe04d8d69",
+      "git -C wexp-vectors checkout edd67056873502a2c3cecf5dd2b8db71271c2f57"
+    ],
+    "run": [
+      "cd wexp-check",
+      "PYTHONPATH=. python3 -B -m unittest discover -s tests",
+      "python3 -B scripts/compare_corpora.py --baseline comparison.json . ../wexp-ref comparison.external.json ../wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json ../wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json"
+    ],
+    "source": "README.md attached to the email from Songbo Bu of 2026-11-17, 01:38 UTC"
+  },
+  "files": {
+    "WEXP_Core02_Replay_20261115.json": {
+      "bytes": 20045,
+      "sha256": "c2a9f8ab705e254a12b5993d646bc8a80f8d7062c39c2689930d6e902c5fdf02",
+      "source": "attachment to the email from Songbo Bu of 2026-11-15, 07:51 UTC; unmodified"
+    }
+  },
+  "format": "wexp-check-external-run-1",
+  "pins": {
+    "wexp_check": "63bde685c54fd6329f1217708d1c211b80c3712e",
+    "wexp_ref": "56289024c9ee748111f1f1d4f42728ffe04d8d69",
+    "wexp_vectors": "edd67056873502a2c3cecf5dd2b8db71271c2f57"
+  },
+  "platform": "macOS 27.2.1 (26B131), arm64, as reported; measured 2026-11-17",
+  "python": "3.12.1",
+  "reported": "emails from Songbo Bu of 2026-11-15, 07:51 UTC (run and output file) and 2026-11-17, 01:38 UTC (repeat run, environment, commands, consent)",
+  "reproducer": "Songbo Bu",
+  "results": {
+    "WEXP-CORE-02-VECTORS-001": {
+      "cases": 89,
+      "both_appraisers_equal_expected": 89
+    },
+    "WEXP-CORE-02-VECTORS-002": {
+      "cases": 35,
+      "both_appraisers_equal_expected": 35
+    },
+    "baseline_differences": 0,
+    "comparison_sha256": "c2a9f8ab705e254a12b5993d646bc8a80f8d7062c39c2689930d6e902c5fdf02",
+    "differences_from_comparison_json_at_63bde68": [
+      "python",
+      "engines (added by the comparison driver)"
+    ],
+    "engines_imported_from": {
+      "wexp_check": "wexp_check/__init__.py",
+      "wexp_ref": "wexp_ref/core02/appraiser.py"
+    },
+    "per_case_rows_identical_to_comparison_json": true,
+    "unit_tests": "37 passed, as reported"
+  },
+  "runner": "the operator's own machine, as reported; no hosted log",
+  "runs": {
+    "2026-11-15": "reported with the output file",
+    "2026-11-17": "repeated at the same commits; reported identical; no file sent"
+  }
+}
