@@ -1,0 +1,48 @@
+{
+  "runner": {
+    "who": "Xinghua Zhao (maintainer of zhaoxinghua09-cell/uibc-core)",
+    "relationship_to_wexp": "Outside project. Not an implementation of WEXP Core-02, and not a contributor to wexp-check or wexp-ref. This is a replay of the published procedure on their code, nothing more.",
+    "machine": "cloud Linux host",
+    "kernel": "6.6.95.bck.4-rc5-amd64",
+    "python": "3.12.11",
+    "ran_utc": "2026-11-19T10:34:30Z",
+    "method": "local checkout, per REPRODUCE.md, no virtualenv, no packages installed"
+  },
+  "pins": {
+    "WEXP-dev/wexp-check": "cfe458b5f90c0a95ad1723b7a0dbba1b8d834fae",
+    "WEXP-dev/wexp-ref": "56289024c9ee748111f1f1d4f42728ffe04d8d69",
+    "WEXP-dev/wexp-vectors": "edd67056873502a2c3cecf5dd2b8db71271c2f57"
+  },
+  "commands": [
+    "git clone https://github.com/WEXP-dev/wexp-check.git",
+    "git clone https://github.com/WEXP-dev/wexp-ref.git && git -C wexp-ref checkout 56289024c9ee748111f1f1d4f42728ffe04d8d69",
+    "git clone https://github.com/WEXP-dev/wexp-vectors.git && git -C wexp-vectors checkout edd67056873502a2c3cecf5dd2b8db71271c2f57",
+    "python3 -B -m unittest discover -s tests",
+    "PYTHONPATH=. python3 -B scripts/compare_corpora.py --baseline comparison.json . /tmp/wexp-ref /tmp/out_comparison.json /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json"
+  ],
+  "results": {
+    "unit_tests": "Ran 37 tests in 0.629s - OK",
+    "WEXP-CORE-02-VECTORS-001": "wexp_check==expected 89/89; wexp_check==wexp_ref 89/89",
+    "WEXP-CORE-02-VECTORS-002": "wexp_check==expected 35/35; wexp_check==wexp_ref 35/35",
+    "driver_exit_status": 0,
+    "row_level_identical_to_comparison.json": true,
+    "note": "Both sets' per-case rows equal those in this repository's comparison.json. The file differs from the repository copy only in the engines block and the python patch level."
+  },
+  "files": {
+    "comparison.json": {
+      "bytes": 20046,
+      "sha256": "eaa7775c714f1b4fbc6b120b8b4fb5501a146d6b7030ffca60738a52741bdbe4",
+      "source": "output of the command above, unedited; it records absolute checkout paths on this machine"
+    },
+    "README.md": {
+      "bytes": 2503,
+      "sha256": "40740c0a8f4b7f217aeae92345108ecfbdaa3889f92740b8b276ccf6f213a33b",
+      "source": "written for this record"
+    }
+  },
+  "limits": [
+    "One machine, one run, one operator: this does not become independent implementation provenance.",
+    "The wexp-check and wexp-ref code was written by the same operator; replaying it on a third machine does not separate the two implementations.",
+    "No GitHub Actions run: this was a local checkout, so no run URL is available to cite."
+  ]
+}
