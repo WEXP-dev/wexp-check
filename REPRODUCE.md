@@ -3,40 +3,52 @@
 Requirements: Python 3.12 or newer, `git`, network access to GitHub. Nothing is installed; both
 appraisers are standard-library Python and run from their checkouts.
 
+The commands put the three checkouts side by side under `/tmp` and run the tests and the comparison
+from `/tmp/wexp-check`. Start with no `wexp-check`, `wexp-ref` or `wexp-vectors` in `/tmp`: the
+comparison reads those paths, so older copies there would be used instead.
+
 ```sh
 python3.12 -m venv venv && . venv/bin/activate
+git clone https://github.com/WEXP-dev/wexp-check.git /tmp/wexp-check && git -C /tmp/wexp-check checkout 63bde685c54fd6329f1217708d1c211b80c3712e
 git clone https://github.com/WEXP-dev/wexp-ref.git /tmp/wexp-ref && git -C /tmp/wexp-ref checkout 56289024c9ee748111f1f1d4f42728ffe04d8d69
 git clone https://github.com/WEXP-dev/wexp-vectors.git /tmp/wexp-vectors && git -C /tmp/wexp-vectors checkout edd67056873502a2c3cecf5dd2b8db71271c2f57
+cd /tmp/wexp-check
 PYTHONPATH=. python3 -B -m unittest discover -s tests
 python3 -B scripts/compare_corpora.py --baseline comparison.json . /tmp/wexp-ref /tmp/comparison.json \
     /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-001/corpus.json \
     /tmp/wexp-vectors/vectors/WEXP-CORE-02-VECTORS-002/corpus.json
 ```
 
+`63bde685` is the revision of this repository that the reusable workflow below replays by default.
+To replay another revision, check that one out instead.
+
 Expected output of the last command (the counts recorded in `RUN-RECORD.json`, run 3; the two
 `imported from` lines, printed once per corpus, name the files the engines were actually loaded from
 and must point into the two checkouts given on the command line):
 
 ```
-wexp_check imported from <this checkout>/wexp_check/__init__.py
+wexp_check imported from /tmp/wexp-check/wexp_check/__init__.py
 wexp_ref imported from /tmp/wexp-ref/src/wexp_ref/core02/appraiser.py
 WEXP-CORE-02-VECTORS-001 wexp_check==expected 89/89; wexp_check==wexp_ref 89/89
-wexp_check imported from <this checkout>/wexp_check/__init__.py
+wexp_check imported from /tmp/wexp-check/wexp_check/__init__.py
 wexp_ref imported from /tmp/wexp-ref/src/wexp_ref/core02/appraiser.py
 WEXP-CORE-02-VECTORS-002 wexp_check==expected 35/35; wexp_check==wexp_ref 35/35
 ```
 
 Each engine runs in a child interpreter started with `-I`, working directory and `sys.path` set to its
 own checkout only; the driver stops if an engine was imported from anywhere else (run 5 in
-`RUN-RECORD.json` is the control). The output file records the two import paths, relative to the
-checkouts, under `engines`.
+`RUN-RECORD.json` is the control). The output file records the two import paths relative to their
+checkouts, under `engines`; the absolute paths appear only in the lines printed above.
 
 The corpora: `WEXP-CORE-02-VECTORS-001` is on `wexp-vectors` main (package revision 2, lock
 `d6827a5e`, `corpus.json` SHA-256 `d5d2c9d5…`); `WEXP-CORE-02-VECTORS-002` (`corpus.json` SHA-256
 `9e301333…`) is the section 7 boundary matrix set, on `wexp-vectors` main since `34b0b351`.
-Commit `edd67056` holds both. `comparison.json` in this repository is the output of the same
-comparison with the two local directory paths removed; with `--baseline comparison.json` the driver
-checks that each set has exactly its case identifiers and per-case results.
+Commit `edd67056` holds both. `comparison.json` in this repository is the record of runs 2 and 3 in
+`RUN-RECORD.json`. It was written by an earlier version of the driver, whose output also held the two
+local checkout paths (`wexp_check_path`, `wexp_ref_src`); those two keys were removed and nothing
+else changed. The driver in this repository writes no directory paths: its output has the sets, the
+Python version and `engines`. With `--baseline comparison.json` the driver compares the sets only:
+each set must have exactly the case identifiers, per-case results and corpus digest of the baseline.
 
 The command exits with status 0 only if every case agrees. It exits non-zero, with a `FAIL` line
 naming the set and the case, if an expectation differs, a case is missing or added, an engine raises
